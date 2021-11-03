@@ -1,10 +1,12 @@
+<a href="/" class="nav-link">Home Nav Left</a>
 <nav>
-    <a href="/">Home Nav Left</a>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <i class="fas fa-times" id="close-btn"></i>
+        <li><a href="/" class="<%= PagetoLoad === 'home' ? 'link-active' : '' %>">Home</a></li>
+        <li><a href="/about" class="<%= PagetoLoad === 'about' ? 'link-active' : '' %>">About</a></li>
+        <li><a href="/services" class="<%= PagetoLoad === 'services' ? 'link-active' : '' %>">Services</a></li>
+        <li><a href="/contact" class="<%= PagetoLoad === 'contact' ? 'link-active' : '' %>">Contact</a></li>
         <li><a href="/nothing">404</a></li>
     </ul>
 </nav>
+<i class="fas fa-bars" id="menu-btn"></i>

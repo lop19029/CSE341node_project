@@ -1,0 +1,31 @@
+body {
+    background: $color5;
+    main {
+        margin-top: 70px;
+        background: white;
+        min-height: calc(100vh - 70px);
+        .page-section {
+            &:nth-of-type(even) {
+                background: #efefef;
+            }
+
+            h1 {
+                color: $color1;
+                font-size: 40px;
+            }
+
+            padding: 64px 10% 25px 10%;
+
+            p {
+                color: #535353;
+
+                strong {
+                    color: #1f1f1f;
+                }
+            }
+        }
+    }
+    footer {
+        background: white;
+    }
+}
