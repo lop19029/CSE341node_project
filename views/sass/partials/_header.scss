@@ -97,11 +97,11 @@ header {
         align-items: center;
         //margin-left: auto;
         /*margin-right: 5px;*/
-        transition: 1s;
+        transition: 0.5s;
         cursor: pointer;
 
         &:hover {
-            transform: rotate(360deg);
+            transform: translateX(5px);
             color: $color3;
         }
     }
