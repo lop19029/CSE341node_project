@@ -62,7 +62,7 @@ app.use((error, req, res, next) => {
     });
   });
 
-/************ Andres ****************/np
+/************ Andres ****************/
 const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose
