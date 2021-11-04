@@ -17,6 +17,11 @@ header {
     .nav-link {
         color: white;
         text-decoration: none;
+        width: 50px;
+        img {
+            width: 100%;
+            display: block;
+        }
     }
     #menu-btn {
         color: white;
