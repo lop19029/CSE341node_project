@@ -1,5 +1,8 @@
 const path = require('path');
 
+/************ Andres ****************/
+const mongoose = require('mongoose')
+
 const express = require('express');
 
 const bodyParser = require('body-parser');
@@ -59,4 +62,16 @@ app.use((error, req, res, next) => {
     });
   });
 
-app.listen(80);
+/************ Andres ****************/np
+const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+mongoose
+.connect(MONGODB_URI)
+.then(result => {
+  app.listen(80);
+  // Check connection in console
+  console.log('Connected to Data base')
+})
+.catch(err => {
+  console.log(err);
+});
