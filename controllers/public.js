@@ -59,6 +59,15 @@ exports.getServices = (req, res, next) => {
     });
 };
 
+//Login
+exports.getLogin = (req, res, next) => {
+    res.render('template', {
+        pageTitle: 'Login',
+        PagetoLoad: 'auth/login',
+        SocialLinks: socialLinks
+    });
+};
+
 //Contact
 exports.getContact = (req, res, next) => {
     let message = req.flash('error');
