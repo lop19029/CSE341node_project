@@ -7,8 +7,9 @@
             <% } %>
         <form action="/signup" method="POST">
             <input class="<%= validationErrors.find(e => e.param === 'uName') ?  'invalid' : '' %>" type="text" required placeholder="Insert your Name" name="uName" value="<%= oldInput.uName %>">
-            <input class="<%= validationErrors.find(e => e.param === 'mail') ?  'invalid' : '' %>" type="email" required placeholder="example@email.com" name="mail" value="<%= oldInput.mail %>">
-            <input class="<%= validationErrors.find(e => e.param === 'password') ?  'invalid' : '' %>" type="password" required placeholder="password" name="password" value="<%= oldInput.password %>">
+            <input class="<%= validationErrors.find(e => e.param === 'mail') ?  'invalid' : '' %>" type="email" required placeholder="Insert your Email" name="mail" value="<%= oldInput.mail %>">
+            <input class="<%= validationErrors.find(e => e.param === 'password') ?  'invalid' : '' %>" type="password" required placeholder="Insert your Password" name="password" value="<%= oldInput.password %>">
+            <input class="<%= validationErrors.find(e => e.param === 'rPassword') ?  'invalid' : '' %>" type="password" required placeholder="Repeat your Password" name="rPassword" value="<%= oldInput.rPassword %>">
             <button>Signup</button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>

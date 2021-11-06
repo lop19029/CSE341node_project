@@ -84,7 +84,8 @@ exports.getSignup = (req, res, next) => {
         oldInput: {
             name: '',
             mail: '',
-            password: ''
+            password: '',
+            rPassword: ''
         },
         validationErrors: []
     });
@@ -95,7 +96,8 @@ exports.postSignup = (req, res, next) => {
     const {
         uName,
         mail,
-        password
+        password,
+        rPassword
     } = req.body;
 
     const errors = validationResult(req);
@@ -108,7 +110,8 @@ exports.postSignup = (req, res, next) => {
             oldInput: {
                 uName: uName,
                 mail: mail,
-                password: password
+                password: password,
+                rPassword: rPassword
             },
             validationErrors: errors.array()
         });

@@ -36,6 +36,11 @@ body('password', 'Por favor ingrese su contraseña correctamente.')
 .isString()
 .isLength({
     min: 5
+}),
+body('rPassword', 'Por favor ingrese su contraseña correctamente.')
+.isString()
+.isLength({
+    min: 5
 })
 ],
 publicController.postSignup);
