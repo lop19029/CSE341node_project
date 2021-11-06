@@ -14,10 +14,6 @@ const {
     validationResult
 } = require('express-validator');
 
-/*********** Andres  ***************/
-///////////// User model Import ////////////////////////////
-const User = require('../models/user');
-
 ///////////////NodeMailer//////////////////////////////////
 const nodemailer = require('nodemailer');
 
