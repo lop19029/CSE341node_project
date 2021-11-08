@@ -1,3 +1,6 @@
+const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+
 const socialLinks = {
     Facebook: "https://www.facebook.com/",
     Twitter: "https://twitter.com/",
@@ -115,30 +118,49 @@ exports.postSignup = (req, res, next) => {
             },
             validationErrors: errors.array()
         });
-    }
-    transporter.sendMail({
-            to: 'marcoantonio@marbust.com', //Please add your personal email where you'll receive the contact form response
-            from: mail,
-            subject: 'Formulario de Contactos | ' + uName,
-            html: `
-        <h1 style='text-align: center;'>Formulario de Contacto</h1>
+    };
+
+    bcrypt.hash(password, 12)
+        .then(hashedPassword => {
+            const user = new User({
+                uName: uName,
+                email: mail,
+                password: hashedPassword
+            });
+            return user.save();
+        })
+        .then(result => {
+            console.log("Succesfully signed up");
+            res.redirect('/login');
+            transporter.sendMail({
+                to: 'marcoantonio@marbust.com', //Please add your personal email where you'll receive the contact form response
+                from: mail,
+                subject: 'Formulario de Contactos | ' + uName,
+                html: `
+            <h1 style='text-align: center;'>Formulario de Contacto</h1>
+            <hr>
+        <ul style='line-height: 2em;'>
+        <li><strong>Nombre:</strong> ${uName}</li>
+        <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
+        </ul>
         <hr>
-    <ul style='line-height: 2em;'>
-    <li><strong>Nombre:</strong> ${uName}</li>
-    <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
-    </ul>
-    <hr>
-    <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
-    `
-        }).then(function (success) {
-            req.flash('error', 'Mensaje Enviado Correctamente!');
-            res.redirect('/signup');
+        <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
+        `
+            }).then(function (success) {
+                req.flash('error', 'Mensaje Enviado Correctamente!');
+                res.redirect('/signup');
+            })
+            .catch(err => {
+                const error = new Error(err);
+                error.httpStatusCode = 500;
+                return next(error);
+              });
         })
         .catch(err => {
             const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
-        });
+          });
 };
 
 

@@ -31,14 +31,15 @@ const User = require('./models/user');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-    User.findById('61860f799b10d67885056abb')
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-});
+
+// app.use((req, res, next) => {
+//     User.findById('61860f799b10d67885056abb')
+//     .then(user => {
+//       req.user = user;
+//       next();
+//     })
+//     .catch(err => console.log(err));
+// });
 
 
 app.use(
@@ -83,12 +84,6 @@ const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongod
 mongoose
 .connect(MONGODB_URI)
 .then(result => {
-  const user = new User({
-    name:'andres',
-    email:'guevaracastroandres@gmail.com', 
-    password:'1234567'
-  });
-  user.save();
   app.listen(80);
   console.log('Connected to Data base')
 })
