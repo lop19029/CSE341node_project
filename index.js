@@ -23,8 +23,24 @@ app.set('views', 'views');
 
 const PublicRoutes = require('./routes/public');
 
+/*********** Andres  ***************/
+//User model 
+const User = require('./models/user');
+
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// app.use((req, res, next) => {
+//     User.findById('61860f799b10d67885056abb')
+//     .then(user => {
+//       req.user = user;
+//       next();
+//     })
+//     .catch(err => console.log(err));
+// });
+
 
 app.use(
     session({
@@ -69,7 +85,6 @@ mongoose
 .connect(MONGODB_URI)
 .then(result => {
   app.listen(80);
-  // Check connection in console
   console.log('Connected to Data base')
 })
 .catch(err => {

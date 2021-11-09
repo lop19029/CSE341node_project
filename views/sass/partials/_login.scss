@@ -35,6 +35,9 @@
                 font-family: inherit;
                 border-radius: 5px;
                 text-align: center;
+                &.invalid {
+                    border: 1px solid $color5;
+                }
             }
             button {
                 display: block;

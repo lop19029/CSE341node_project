@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../models/user');
 
 const {
     check,
@@ -17,6 +18,45 @@ router.get('/about', publicController.getAbout);
 router.get('/services', publicController.getServices);
 //Services
 router.get('/login', publicController.getLogin);
+
+router.get('/signup', publicController.getSignup);
+
+router.post('/signup',
+[
+body('uName', 'The name field must be at least 3 characters long.')
+.isString()
+.isLength({
+    min: 3
+})
+.trim(),
+body('mail', 'Please enter a valid email address.')
+.isEmail()
+// .custom((value, {req}) => {
+//         return User.findOne({mail: value}) //check repeated users
+//         .then(userDoc => {
+//             if(userDoc) {
+//                return Promise.reject(
+//                    'A user with that e-mail already exists.'
+//                );
+//             }
+//         });
+//     })
+.normalizeEmail(),
+body('password', 'Password must be at least 5 characters long.')
+.isString()
+.isLength({
+    min: 5
+}),
+body('rPassword','Passwords have to match')
+.custom((value, {req}) => {
+    if (value !== req.body.password) {
+        throw new Error ('Passwords have to match');
+    }
+    return true;
+})
+],
+publicController.postSignup);
+
 //Contact
 router.get('/contact', publicController.getContact);
 //Post Contact
