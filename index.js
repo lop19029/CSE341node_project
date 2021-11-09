@@ -23,6 +23,7 @@ app.set('views', 'views');
 
 const PublicRoutes = require('./routes/public');
 
+const AuthRoutes = require('./routes/auth');
 /*********** Andres  ***************/
 //User model 
 const User = require('./models/user');
@@ -55,13 +56,14 @@ app.use(
   app.use(flash());
   
   app.use((req, res, next) => {
-      res.locals.csrfToken = req.csrfToken();
-      next();
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
     });
-
+app.use(AuthRoutes);
 app.use(PublicRoutes);
 
-app.use((error, req, res, next) => {
+/*app.use((error, req, res, next) => {
     res.status(500).render('template', {
         pageTitle: 'Error de Validación',
         PagetoLoad: '500',
@@ -77,7 +79,7 @@ app.use((error, req, res, next) => {
         }
     });
   });
-
+*/
 /************ Andres ****************/
 const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 

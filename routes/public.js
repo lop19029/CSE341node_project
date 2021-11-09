@@ -7,7 +7,7 @@ const {
 } = require('express-validator');
 
 const publicController = require('../controllers/public');
-
+const authController = require('../controllers/auth');
 const router = express.Router();
 
 //Home
@@ -16,12 +16,12 @@ router.get('/', publicController.getIndex);
 router.get('/about', publicController.getAbout);
 //Services
 router.get('/services', publicController.getServices);
-//Services
-router.get('/login', publicController.getLogin);
+//Login
+//router.get('/login', publicController.getLogin);
+//router.post('/auth/login', publicController.postLogin);
+//router.get('/signup', authController.getSignup);
 
-router.get('/signup', publicController.getSignup);
-
-router.post('/signup',
+/*router.post('/signup',
 [
 body('uName', 'The name field must be at least 3 characters long.')
 .isString()
@@ -56,7 +56,7 @@ body('rPassword','Passwords have to match')
 })
 ],
 publicController.postSignup);
-
+*/
 //Contact
 router.get('/contact', publicController.getContact);
 //Post Contact
