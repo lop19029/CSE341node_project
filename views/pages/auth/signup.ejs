@@ -5,7 +5,7 @@
         <% if(errorMessage) { %>
             <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
             <% } %>
-        <form action="/signup" method="POST">
+        <form action="/auth/signup" method="POST">
             <input class="<%= validationErrors.find(e => e.param === 'uName') ?  'invalid' : '' %>" type="text" required placeholder="Insert your Name" name="uName" value="<%= oldInput.uName %>">
             <input class="<%= validationErrors.find(e => e.param === 'mail') ?  'invalid' : '' %>" type="email" required placeholder="Insert your Email" name="mail" value="<%= oldInput.mail %>">
             <input class="<%= validationErrors.find(e => e.param === 'password') ?  'invalid' : '' %>" type="password" required placeholder="Insert your Password" name="password" value="<%= oldInput.password %>">

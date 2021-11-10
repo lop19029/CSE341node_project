@@ -60,26 +60,25 @@ app.use(
     res.locals.csrfToken = req.csrfToken();
     next();
     });
-app.use(AuthRoutes);
+app.use('/auth', AuthRoutes);
 app.use(PublicRoutes);
 
-/*app.use((error, req, res, next) => {
-    res.status(500).render('template', {
-        pageTitle: 'Error de Validación',
-        PagetoLoad: '500',
-        SocialLinks: {
-            Facebook: "https://www.facebook.com/",
-            Twitter: "https://twitter.com/",
-            WhatsApp: "https://api.whatsapp.com/send?phone=593",
-            Phone: "tel:+99999999999",
-            Instagram: "https://www.instagram.com/",
-            Youtube: "https://www.youtube.com/",
-            Email: "mailto:@",
-            Copyright: "https://Sites.MarBust.com"
-        }
-    });
-  });
-*/
+// app.use((error, req, res, next) => {
+//     res.status(500).render('template', {
+//         pageTitle: 'Error de Validación',
+//         PagetoLoad: '500',
+//         SocialLinks: {
+//             Facebook: "https://www.facebook.com/",
+//             Twitter: "https://twitter.com/",
+//             WhatsApp: "https://api.whatsapp.com/send?phone=593",
+//             Phone: "tel:+99999999999",
+//             Instagram: "https://www.instagram.com/",
+//             Youtube: "https://www.youtube.com/",
+//             Email: "mailto:@",
+//             Copyright: "https://Sites.MarBust.com"
+//         }
+//     });
+//   });
 /************ Andres ****************/
 const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 

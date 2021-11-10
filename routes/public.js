@@ -7,7 +7,6 @@ const {
 } = require('express-validator');
 
 const publicController = require('../controllers/public');
-const authController = require('../controllers/auth');
 const router = express.Router();
 
 //Home
