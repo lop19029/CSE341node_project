@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../models/user');
 
 
 //const authPublic = require('../controllers/public')
@@ -36,18 +37,18 @@ body('uName', 'The name field must be at least 3 characters long.')
     min: 3
 })
 .trim(),
-body('mail', 'Please enter a valid email address.')
+body('mail')
 .isEmail()
-// .custom((value, {req}) => {
-//         return User.findOne({mail: value}) //check repeated users
-//         .then(userDoc => {
-//             if(userDoc) {
-//                return Promise.reject(
-//                    'A user with that e-mail already exists.'
-//                );
-//             }
-//         });
-//     })
+.custom((value, {req}) => {
+        return User.findOne({mail: value}) //check repeated users
+        .then(userDoc => {
+            if(userDoc) {
+                console.log("I found one")
+                throw new Error ('A user with that email already exists.');
+            }
+            return true;
+        });
+    })
 .normalizeEmail(),
 body('password', 'Password must be at least 5 characters long.')
 .isString()

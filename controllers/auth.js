@@ -142,34 +142,50 @@ exports.postSignup = (req, res, next) => {
           },
           validationErrors: errors.array()
       });
-  }
-  //Add function to Signup
+    };
 
-  //End
-  transporter.sendMail({
-          to: 'marcoantonio@marbust.com, alexandre@byui.edu, cas18057.byui.edu, lop19029@byui.edu', //Please add your personal email where you'll receive the contact form response
-          from: mail,
-          subject: 'Formulario de Contactos | ' + uName,
-          html: `
-      <h1 style='text-align: center;'>Formulario de Contacto</h1>
-      <hr>
-  <ul style='line-height: 2em;'>
-  <li><strong>Nombre:</strong> ${uName}</li>
-  <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
-  </ul>
-  <hr>
-  <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
-  `
-      }).then(function (success) {
-          req.flash('error', 'Mensaje Enviado Correctamente!');
-          res.redirect('/auth/signup');
-      })
-      .catch(err => {
-          const error = new Error(err);
-          error.httpStatusCode = 500;
-          return next(error);
-      });
-};
+    bcrypt.hash(password, 12)
+        .then(hashedPassword => {
+            const user = new User({
+                uName: uName,
+                email: mail,
+                password: hashedPassword
+            });
+            return user.save();
+        })
+        .then(result => {
+            console.log("Succesfully signed up");
+            res.redirect('/auth/login');
+            transporter.sendMail({
+                to: 'marcoantonio@marbust.com, alexandre@byui.edu, cas18057.byui.edu, lop19029@byui.edu', //Please add your personal email where you'll receive the contact form response
+                from: mail,
+                subject: 'Formulario de Contactos | ' + uName,
+                html: `
+            <h1 style='text-align: center;'>Formulario de Contacto</h1>
+            <hr>
+        <ul style='line-height: 2em;'>
+        <li><strong>Nombre:</strong> ${uName}</li>
+        <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
+        </ul>
+        <hr>
+        <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
+        `
+            }).then(function (success) {
+                req.flash('error', 'Mensaje Enviado Correctamente!');
+                res.redirect('/signup');
+            })
+            .catch(err => {
+                const error = new Error(err);
+                error.httpStatusCode = 500;
+                return next(error);
+              });
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+          });
+}
 
 //Recover Password
 exports.getReset = (req, res, next) => {
