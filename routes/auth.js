@@ -40,14 +40,15 @@ body('uName', 'The name field must be at least 3 characters long.')
 body('mail')
 .isEmail()
 .custom((value, {req}) => {
-        return User.findOne({mail: value}) //check repeated users
-        .then(userDoc => {
-            if(userDoc) {
-                console.log("I found one")
-                throw new Error ('A user with that email already exists.');
-            }
-            return true;
-        });
+        return User.findOne({email: value}) //check repeated users
+            .then(userDoc => {
+                if(userDoc) {
+                    console.log("A user with that e-mail already exists.")
+                   return Promise.reject(
+                       'A user with that e-mail already exists.'
+                   );
+                }
+            });
     })
 .normalizeEmail(),
 body('password', 'Password must be at least 5 characters long.')
