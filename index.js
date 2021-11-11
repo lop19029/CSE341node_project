@@ -31,18 +31,6 @@ const User = require('./models/user');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-// app.use((req, res, next) => {
-//     User.findById('61860f799b10d67885056abb')
-//     .then(user => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch(err => console.log(err));
-// });
-
-
 app.use(
     session({
       secret: 'my secret',
@@ -58,6 +46,7 @@ app.use(
   app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
     res.locals.csrfToken = req.csrfToken();
+    
     next();
     });
 app.use('/auth', AuthRoutes);
