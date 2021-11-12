@@ -66,8 +66,13 @@ body('rPassword','Passwords have to match')
 ],
 authController.postSignup);
 
-//Reset
 
+/**************** Andres ********************/
+// logout
+router.post('/logout', authController.postLogout);
+
+
+//Reset
 router.get('/reset', authController.getReset);
 
 router.post('/reset', 

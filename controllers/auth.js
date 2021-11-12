@@ -96,7 +96,7 @@ exports.postLogin = (req, res, next) => {
                     //console.log(err);
                     console.log("Successful login")
                     res.redirect('/');
-                })
+                });
             }
             return res.status(422).render('template', {
                 pageTitle: 'Login',
@@ -147,6 +147,17 @@ exports.postLogin = (req, res, next) => {
             return next(error);*/
         });
 };
+
+
+//Logout 
+exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+      console.log(err);
+      res.redirect('/');
+    });
+  };
+
+
 
 //Signup
 exports.getSignup = (req, res, next) => {

@@ -9,6 +9,9 @@ const bodyParser = require('body-parser');
 
 const session = require('express-session');
 
+/************ Andres ****************/
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 const csrf = require('csurf');
 
 const flash = require('connect-flash');
@@ -24,9 +27,16 @@ app.set('views', 'views');
 const PublicRoutes = require('./routes/public');
 
 const AuthRoutes = require('./routes/auth');
+
 /*********** Andres  ***************/
-//User model 
 const User = require('./models/user');
+
+const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: 'sessions'
+});
 
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -35,7 +45,8 @@ app.use(
     session({
       secret: 'my secret',
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
+      store: store
     })
   );
 
@@ -44,11 +55,11 @@ app.use(
   app.use(flash());
   
   app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
-    res.locals.csrfToken = req.csrfToken();
-    
-    next();
+      res.locals.isAuthenticated = req.session.isLoggedIn;
+      res.locals.csrfToken = req.csrfToken();  
+      next();
     });
+
 app.use('/auth', AuthRoutes);
 app.use(PublicRoutes);
 
@@ -69,8 +80,6 @@ app.use(PublicRoutes);
 //     });
 //   });
 /************ Andres ****************/
-const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
 mongoose
 .connect(MONGODB_URI)
 .then(result => {
