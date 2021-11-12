@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     session({
-      secret: 'my secret',
+      secret: 'my secret1',
       resave: false,
       saveUninitialized: false,
       store: store
@@ -59,7 +59,24 @@ app.use(
       res.locals.csrfToken = req.csrfToken();  
       next();
     });
-
+    app.use((req, res, next) => {
+      // throw new Error('Sync Dummy');
+      if (!req.session.user) {
+        return next();
+      }
+      User.findById(req.session.user._id)
+        .then(user => {
+          if (!user) {
+            return next();
+          }
+          req.user = user;
+          res.locals.name = user.uName;
+          next();
+        })
+        .catch(err => {
+          next(new Error(err));
+        });
+    });
 app.use('/auth', AuthRoutes);
 app.use(PublicRoutes);
 

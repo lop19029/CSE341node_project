@@ -122,7 +122,7 @@ exports.postLogin = (req, res, next) => {
     });
 
 // Ends
-    transporter.sendMail({
+    /*transporter.sendMail({
             to: 'contact@sacredplanner.xyz', //Please add your personal email where you'll receive the contact form response
             from: mail,
             subject: 'Login | ' + mail,
@@ -144,14 +144,14 @@ exports.postLogin = (req, res, next) => {
             console.log(`Error-email: ${err}`);
             /*const error = new Error(err);
             error.httpStatusCode = 500;
-            return next(error);*/
-        });
+            return next(error);
+        });*/
 };
 
 
 //Logout 
 exports.postLogout = (req, res, next) => {
-    req.session.destroy(err => {
+      req.session.destroy(err => {
       console.log(err);
       res.redirect('/');
     });

@@ -1,6 +1,7 @@
 <a href="/" class="nav-link"><img src="/img/header/logo-white.png" alt="Page logo"></a>
 <nav>
     <ul>
+        
         <i class="fas fa-arrow-right" id="close-btn"></i>
         <li><a href="/" class="<%= PagetoLoad === 'home' ? 'link-active' : '' %>">Home</a></li>
         <% if(!isAuthenticated) { %> 
@@ -8,11 +9,16 @@
         <li><a href="/auth/signup" class="<%= PagetoLoad === 'auth/signup' ? 'link-active' : '' %>">Signup</a></li>
         <% } else { %>
         <li>
-            <form action="/logout" method="post">
+            
+            <form action="/auth/logout" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button id="logoutbtn" type="submit">logout</button>
                 <style> #logoutbtn { display: block; padding: 15px 20px; margin: 0px 5px; color:white;  background: #240046; font-family: "Roboto",sans-serif; font-size:16px; border: none;  cursor: pointer; box-sizing: border-box; } </style>
             </form>
+            <h5 style="position:absolute;left: 80px;top:24px; ">Welcome <%= name %></h5>
         </li>
+       
+
         <% } %>
     </ul>
 </nav>
