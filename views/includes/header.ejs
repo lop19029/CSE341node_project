@@ -1,4 +1,7 @@
 <a href="/" class="nav-link"><img src="/img/header/logo-white.png" alt="Page logo"></a>
+<% if(isAuthenticated) { %>
+<p class="fs20px fs-i-18px fs-m-16px fs-p-14px user-Name tac pl5px pr5px">Welcome <strong><%= name %></strong></p>
+<% } %>
 <nav>
     <ul>
         
