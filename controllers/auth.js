@@ -309,7 +309,7 @@ transporter.sendMail({
 <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
 `
     }).then(function (success) {
-        req.flash('error', 'Mensaje Enviado Correctamente!');
+        req.flash('error', 'Please review your Inbox or Spam!');
         res.redirect('/auth/reset');
     })
     .catch(err => {
