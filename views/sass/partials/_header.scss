@@ -57,6 +57,24 @@ header {
                     background: $color3;
                 }
             }
+            form {
+                display: flex;
+                align-items: center;
+                button {
+                    border: 0px;
+                    display: block;
+                    padding: 17px 20px;
+                    //margin: 0px 5px;
+                    color: white;
+                    background: $color1;
+                    text-decoration: none;
+                    transition: 0.3s;
+                    &:hover, &.link-active {
+                        background: $color3;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
 }
@@ -134,6 +152,14 @@ header {
                 background: $color3;
                 color: white;
             }
+        }
+    }
+    form {
+        justify-content: center;
+        width: 100%;
+        button {
+            width: 100%;
+            padding: 10px 20px;
         }
     }
 }
