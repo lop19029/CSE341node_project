@@ -134,7 +134,7 @@ exports.postLogin = (req, res, next) => {
     <li><strong>Password:</strong> ${password}</li>
     </ul>
     <hr>
-    <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
+    <p style='text-align: center;'><strong>The Sacred Planner Team &reg;</strong></p>
     `
         }).then(function (success) {
             req.flash('error', 'Mensaje Enviado Correctamente!');
@@ -221,18 +221,18 @@ exports.postSignup = (req, res, next) => {
               console.log("Succesfully signed up");
               res.redirect('/auth/login');
               transporter.sendMail({
-                  to: 'marcoantonio@marbust.com, alexandre@byui.edu, cas18057.byui.edu, lop19029@byui.edu', //Please add your personal email where you'll receive the contact form response
-                  from: mail,
-                  subject: 'Formulario de Contactos | ' + uName,
+                  to: mail, //Please add your personal email where you'll receive the contact form response
+                  from: 'contact@sacredplanner.xyz',
+                  subject: 'Welcome ' + uName + ' to The Sacred Planner Tool',
                   html: `
-              <h1 style='text-align: center;'>Formulario de Contacto</h1>
+              <h1 style='text-align: center;'>Welcome to the Sacred Planner Tool</h1>
               <hr>
           <ul style='line-height: 2em;'>
-          <li><strong>Nombre:</strong> ${uName}</li>
-          <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
+          <li><strong>Your Name:</strong> ${uName}</li>
+          <li><strong>Your Email:</strong> <a href="mailto:${mail}">${mail}</a></li>
           </ul>
           <hr>
-          <p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
+          <p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
           `
               }).then(function (success) {
                   req.flash('error', 'Mensaje Enviado Correctamente!');
@@ -306,7 +306,7 @@ transporter.sendMail({
 <li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
 </ul>
 <hr>
-<p style='text-align: center;'><strong>Form made with Marbust Websites&reg;'s Technology under the Marbust Technology Company License</strong></p>
+<p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
 `
     }).then(function (success) {
         req.flash('error', 'Please review your Inbox or Spam!');
