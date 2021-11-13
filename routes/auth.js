@@ -86,3 +86,7 @@ authController.postReset);
 //router.post('/logout', authController.postLogout);
 
 module.exports = router;
+
+/**************** Tiago ********************/
+
+router.get('/reset', authController.getReset);
