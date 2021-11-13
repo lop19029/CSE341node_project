@@ -69,7 +69,7 @@ authController.postSignup);
 
 /**************** Andres ********************/
 // logout
-router.post('/logout', authController.postLogout);
+router.get('/logout', authController.getLogout);
 
 
 //Reset
