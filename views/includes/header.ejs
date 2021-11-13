@@ -10,7 +10,7 @@
         <% } else { %>
         <form action="/auth/logout" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button id="logoutbtn" type="submit">Logout</button>
+                <button id="logoutbtn" type="submit">Logout <i class="fas fa-power-off"></i></button>
         </form>     
         <% } %>
     </ul>
