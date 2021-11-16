@@ -4,7 +4,17 @@
         <hr>
         <% if(errorMessage) { %>
             <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
-            <% } %>
+        <% } %>
+        <% if(isAdded) { %>
+            <script>
+                Swal.fire(
+                'Successful Registration',
+                'Welcome to Sacred Planner ',
+                'success'
+            )
+            </script>
+            
+        <% } %>
         <form action="/auth/login" method="POST">
             <input class="<%= validationErrors.find(e => e.param === 'mail') ?  'invalid' : '' %>" type="email" name="mail" id="email" required placeholder="example@email.com" value="<%= oldInput.mail %>">
             <input class="<%= validationErrors.find(e => e.param === 'password') ?  'invalid' : '' %>" type="password" name="password" id="password" required placeholder="password" value="<%= oldInput.password %>">
@@ -12,5 +22,6 @@
             <button type="submit">Login</button>
         </form>
         <p class="form-options"><a href="/auth/reset">Recover <i class="fas fa-key"></i></a> | <a href="/auth/signup">Signup <i class="fas fa-user-plus"></i></a></p>
+        
     </div>
 </div>

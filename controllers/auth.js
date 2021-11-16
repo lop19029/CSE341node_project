@@ -92,6 +92,7 @@ exports.postLogin = (req, res, next) => {
                 req.session.user = user;
                 req.session.name = user.uName;
                 console.log(user.uName);
+                
                 return req.session.save(err => {
                     //console.log(err);
                     console.log("Successful login")
@@ -217,9 +218,11 @@ exports.postSignup = (req, res, next) => {
               });
               return user.save();
           })
-          .then(result => {
+          .then (result => {
+              req.session.isAdded = true;
               console.log("Succesfully signed up");
-              res.redirect('/auth/login');
+              res.redirect ('/auth/login');
+              
               transporter.sendMail({
                   to: mail, //Please add your personal email where you'll receive the contact form response
                   from: 'contact@sacredplanner.xyz',
@@ -249,6 +252,7 @@ exports.postSignup = (req, res, next) => {
               error.httpStatusCode = 500;
               return next(error);
             });
+            req.session.isAdded = false;
   }
   
 
@@ -310,8 +314,8 @@ exports.getReset = (req, res, next) => {
 
 // Ends
 transporter.sendMail({
-        to: 'contact@sacredplanner.xyz', //Please add your personal email where you'll receive the contact form response
-        from: mail,
+        to: mail, //Please add your personal email where you'll receive the contact form response
+        from: 'contact@sacredplanner.xyz',
         subject: 'Reset Password | ' + mail,
         html: `
     <h1 style='text-align: center;'>Formulario de Contacto</h1>
