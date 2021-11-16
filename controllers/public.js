@@ -26,6 +26,9 @@ const {
 
 //Home
 exports.getIndex = (req, res, next) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/auth/login');
+    }
     res.render('template', {
         pageTitle: 'Home',
         PagetoLoad: 'home',
@@ -35,10 +38,10 @@ exports.getIndex = (req, res, next) => {
 
 
 //About
-exports.getAbout = (req, res, next) => {
+exports.getAgendas = (req, res, next) => {
     res.render('template', {
-        pageTitle: 'About',
-        PagetoLoad: 'about',
+        pageTitle: 'Agendas',
+        PagetoLoad: 'agendas',
         SocialLinks: socialLinks
     });
 };

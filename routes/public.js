@@ -12,7 +12,7 @@ const router = express.Router();
 //Home
 router.get('/', publicController.getIndex);
 //About
-router.get('/about', publicController.getAbout);
+router.get('/agendas', publicController.getAgendas);
 //Services
 router.get('/services', publicController.getServices);
 //Login

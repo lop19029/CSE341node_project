@@ -1,0 +1,150 @@
+.dashboard {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/banner/dashboard.jpg);
+    min-height: calc(100vh - 70px);
+    padding: 30px 10%;
+
+    h1 {
+        color: white;
+    }
+
+    .content-box {
+        background: white;
+        filter: drop-shadow(2px 2px 4px rgba(128, 128, 128, 0.32));
+        padding: 0px 0px 30px 0px;
+        transition: 0.3s;
+        text-decoration: none;
+        //overflow: hidden;
+
+        figure {
+            overflow: hidden;
+
+            img {
+                pointer-events: none;
+                transform: scale(1);
+                transition: 0.3s ease-out;
+                filter: grayscale(75%);
+            }
+        }
+
+
+
+        &:hover {
+            //transform: scale(1.005);
+            filter: drop-shadow(2px 2px 4px rgba(128, 128, 128, 0.52));
+            background: #e8e8e8;
+
+            figure {
+                img {
+                    transform: scale(1.05);
+                    filter: grayscale(0%);
+                }
+            }
+
+            //background: rgba(0, 0, 0, 0.01);
+
+        }
+
+        p {
+            padding: 0px 5px;
+            color: $color1;
+            font-size: 30px;
+        }
+    }
+
+    .date-box {
+        background: white;
+        border-radius: 10px;
+        transition: 0.3s;
+        &:hover {
+            filter: drop-shadow(4px 4px 5px rgba(49, 49, 49, 0.54));
+            .date {
+                background-position: right center;
+            }
+        }
+        .date {
+            display: block;
+            text-decoration: none;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            background-size: 200% auto;
+            border-radius: 10px 10px 0px 0px;
+            text-align: center;
+            padding: 25px 10px;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+
+            .month {
+                font-size: 40px;
+            }
+
+            .day {
+                font-size: 35px;
+            }
+        }
+        .options {
+            padding: 10px 5px;
+            display: flex;
+            justify-content: center;
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                color: white;
+                margin: 3px;
+                border-radius: 50%;
+                text-decoration: none;
+                transition: 0.3s ease-in;
+                &:nth-child(1) {
+                    background: $color1;
+                }
+                &:nth-child(2) {
+                    background: $color3;
+                }
+                &:nth-child(3) {
+                    background: rgb(30, 30, 114);
+                }
+                &:nth-child(4) {
+                    background: green;
+                }
+                &:hover {
+                    //transform: scale(1.05);
+                    filter: drop-shadow(4px 4px 5px rgba(49, 49, 49, 0.54));
+                }
+            }
+        }
+    }
+}
+
+.add-agenda-btn {
+    z-index: 5;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    background: $color1;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 50%;
+    font-size: 25px;
+    filter: drop-shadow(4px 4px 5px rgba(49, 49, 49, 0.54));
+    &, i {
+        transition: 0.2s;
+    }
+    &:hover {
+        background: $color3;
+        i {
+            transform: scale(1.1);
+        }
+    }
+}
