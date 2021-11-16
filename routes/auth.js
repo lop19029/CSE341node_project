@@ -31,6 +31,7 @@ router.get('/signup', authController.getSignup);
 
 router.post('/signup',
 [
+    
 body('uName', 'The name field must be at least 3 characters long.')
 .isString()
 .isLength({
@@ -61,6 +62,7 @@ body('rPassword','Passwords have to match')
     if (value !== req.body.password) {
         throw new Error ('Passwords have to match');
     }
+    
     return true;
 })
 ],
