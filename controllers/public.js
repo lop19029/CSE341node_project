@@ -55,6 +55,7 @@ exports.getAgendas = (req, res, next) => {
     });
   };*/
 //Services
+
 exports.getServices = (req, res, next) => {
     res.render('template', {
         pageTitle: 'Services',
