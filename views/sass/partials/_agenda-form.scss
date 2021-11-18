@@ -44,7 +44,7 @@
                 cursor: pointer;
                 transition: 0.3s;
                 font-weight: bold;
-                &:hover {
+                &:hover, &.btn-active {
                     background: $color1;
                     color: white;
                     border-radius: 5px;
@@ -106,6 +106,7 @@
                 }
                 &:disabled {
                     background: gray;
+                    cursor: no-drop;
                 }
             }
         }
