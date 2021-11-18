@@ -9,12 +9,15 @@ const {
 const publicController = require('../controllers/public');
 const router = express.Router();
 
+/**************** Andres ********************/ 
+const isAuth = require('../middleware/is-auth');
+
 //Home
 router.get('/', publicController.getIndex);
 //About
-router.get('/agendas', publicController.getAgendas);
+router.get('/agendas', isAuth, publicController.getAgendas);
 //Services
-router.get('/add-agenda', publicController.getAddAgenda);
+router.get('/add-agenda', isAuth, publicController.getAddAgenda);
 //Login
 //router.get('/login', publicController.getLogin);
 //router.post('/auth/login', publicController.postLogin);
