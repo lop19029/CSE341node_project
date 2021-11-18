@@ -30,6 +30,30 @@
             margin: 5px 2px;
             box-shadow: 0 3px 7px 0 rgb(0 0 0 / 12%), inset 0 -1px 0 0 #dadce0;
         }
+        #nfoptions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            span {
+                display: block;
+                border: 2px solid $color1;
+                margin: 5px;
+                width: 100px;
+                padding: 10px;
+                color: $color1;
+                cursor: pointer;
+                transition: 0.3s;
+                font-weight: bold;
+                &:hover {
+                    background: $color1;
+                    color: white;
+                    border-radius: 5px;
+                }
+            }
+        }
+        #isNormalMeeting, #finalAgendaOptions {
+            display: none;
+        }
         form {
             width: 100%;
             input {
@@ -79,6 +103,9 @@
                 &:hover {
                     cursor: pointer;
                     background: $color3;
+                }
+                &:disabled {
+                    background: gray;
                 }
             }
         }

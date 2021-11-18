@@ -3,15 +3,18 @@
         <h1>Add Agenda</h1>
         <hr>
         <% if(errorMessage) { %>
-            <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
-            <% } %>
+        <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
+        <% } %>
         <form action="" method="POST">
             <p>Date:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'MeetingDay') ?  'invalid' : '' %>" type="date" name="MeetingDay" required value="<%= oldInput.MeetingDay %>">
+            <input class="<%= validationErrors.find(e => e.param === 'MeetingDay') ?  'invalid' : '' %>" type="date"
+                name="MeetingDay" required value="<%= oldInput.MeetingDay %>">
             <p>Presiding Authority:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text" required placeholder="Who is presiding the meeting?" name="presiding" value="<%= oldInput.presiding %>">
+            <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
+                required placeholder="Who is presiding the meeting?" name="presiding" value="<%= oldInput.presiding %>">
             <p>Leading Authority:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text" required placeholder="Who is leading the meeting?" name="leading" value="<%= oldInput.leading %>">
+            <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text"
+                required placeholder="Who is leading the meeting?" name="leading" value="<%= oldInput.leading %>">
             <hr>
             <p>Authorities Acknowledgment:</p>
             <textarea name="" placeholder="Authorities Acknowledgment"></textarea>
@@ -33,8 +36,40 @@
             <p>Sacrament Hymn:</p>
             <input type="text" placeholder="What is the sacrament hymn?">
             <hr>
-            <button>Create</button>
+            <h2>Select if it's a Normal or a Fast Meeting</h2>
+            <div id="nfoptions">
+                <span id="nMeetingBtn">Normal</span>
+                <span id="fMeetingBtn">Fast</span>
+            </div>
+            <hr>
+            <div id="isNormalMeeting">
+                <p>First Talk Speaker:</p>
+                <input type="text" placeholder="Who is the First Talk Speaker?">
+                <p>First Talk Topic:</p>
+                <input type="text" placeholder="Who is the First Talk Topic?">
+                <br>
+                <br>
+                <p>Second Talk Speaker:</p>
+                <input type="text" placeholder="Who is the Second Talk Speaker?">
+                <p>Second Talk Topic:</p>
+                <input type="text" placeholder="Who is the Second Talk Topic?">
+                <br>
+                <br>
+                <p>Third Talk Speaker:</p>
+                <input type="text" placeholder="Who is the Third Talk Speaker?">
+                <p>Third Talk Topic:</p>
+                <input type="text" placeholder="Who is the Third Talk Topic?">
+                <hr>
+            </div>
+            <div id="finalAgendaOptions">
+                <p>Last Hymn:</p>
+                <input type="text" placeholder="What is the last hymn?">
+                <p>Last Prayer:</p>
+                <input type="text" placeholder="What is the Last prayer?">
+            </div>
+            <button disabled id="btn-agenda">Create</button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="meetingKind" id="meetingKind" value="">
         </form>
     </div>
 </div>
