@@ -1,0 +1,40 @@
+<div class="agenda-form-page">
+    <div class="login-box box-5 box-i-7 box-m-10 box-p-12">
+        <h1>Add Agenda</h1>
+        <hr>
+        <% if(errorMessage) { %>
+            <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
+            <% } %>
+        <form action="" method="POST">
+            <p>Date:</p>
+            <input class="<%= validationErrors.find(e => e.param === 'MeetingDay') ?  'invalid' : '' %>" type="date" name="MeetingDay" required value="<%= oldInput.MeetingDay %>">
+            <p>Presiding Authority:</p>
+            <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text" required placeholder="Who is presiding the meeting?" name="presiding" value="<%= oldInput.presiding %>">
+            <p>Leading Authority:</p>
+            <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text" required placeholder="Who is leading the meeting?" name="leading" value="<%= oldInput.leading %>">
+            <hr>
+            <p>Authorities Acknowledgment:</p>
+            <textarea name="" placeholder="Authorities Acknowledgment"></textarea>
+            <p>Piano Player:</p>
+            <input type="text" placeholder="Who is playing the piano?">
+            <p>Music Director:</p>
+            <input type="text" placeholder="Who is directing the music?">
+            <p>First Hymn:</p>
+            <input type="text" placeholder="What is the first hymn?">
+            <p>First Prayer:</p>
+            <input type="text" placeholder="What is the first prayer?">
+            <hr>
+            <p>Ward Affairs:</p>
+            <textarea placeholder="What are the Ward Affairs?"></textarea>
+            <p>Stake Affairs</p>
+            <hr>
+            <h2>Sacrament Time</h2>
+            <br>
+            <p>Sacrament Hymn:</p>
+            <input type="text" placeholder="What is the sacrament hymn?">
+            <hr>
+            <button>Create</button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+    </div>
+</div>

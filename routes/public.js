@@ -14,7 +14,7 @@ router.get('/', publicController.getIndex);
 //About
 router.get('/agendas', publicController.getAgendas);
 //Services
-router.get('/services', publicController.getServices);
+router.get('/add-agenda', publicController.getAddAgenda);
 //Login
 //router.get('/login', publicController.getLogin);
 //router.post('/auth/login', publicController.postLogin);

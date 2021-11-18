@@ -56,12 +56,24 @@ exports.getAgendas = (req, res, next) => {
   };*/
 //Services
 
-exports.getServices = (req, res, next) => {
+exports.getAddAgenda = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('template', {
-        pageTitle: 'Services',
-        PagetoLoad: 'services',
+        pageTitle: 'Add Agenda',
+        PagetoLoad: 'agenda-form',
         SocialLinks: socialLinks,
-        Title: 'Mijin'
+        errorMessage: message,
+        oldInput: {
+            presiding: '',
+            leading: '',
+            MeetingDay: ''
+        },
+        validationErrors: []
     });
 };
 
