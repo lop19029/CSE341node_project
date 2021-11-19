@@ -37,35 +37,42 @@ const normalAngendaSchema = new Schema({
   },
   wAffairs: {
     type: String,
-    required: true
+    required: true,
+    default:null
   },
   sHymn: {
     type: String,
     required: true
   },
+    // This item will be send as "null" for the fast agenda option 
   fSpeaker: {
     type: String,
-    required: true
+    default:null
   },
+  // This item will be send as "null" for the fast agenda option 
   fTopic: {
     type: String,
-    required: true
+    default:null
   },
+  // This item will be send as "null" for the fast agenda option 
   sSpeaker: {
     type: String,
-    required: true
+    default:null
   },
+  // This item will be send as "null" for the fast agenda option 
   sTopic: {
     type: String,
-    required: true
+    default:null
   },
+    // This item will be send as "null" for the fast agenda option 
   tSpeaker: {
     type: String,
-    required: true
+    default:null
   },
+    // This item will be send as "null" for the fast agenda option 
   tTopic: {
     type: String,
-    required: true
+    default:null
   },
   lHymn: {
     type: String,

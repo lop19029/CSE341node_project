@@ -21,7 +21,15 @@ router.get('/agendas', isAuth, agendaController.getAgendas);
 
 //add agendas 
 router.get('/add-agenda', isAuth, agendaController.getAddAgenda);
-router.post('/add-agenda', isAuth, agendaController.postAddAgenda);
+router.post('/add-agenda',
+
+// validation section not finished yet 
+[
+body('meetingDay', 'Please Enter the date of the meeting.')
+.isEmpty()
+.isString()
+],
+isAuth, agendaController.postAddAgenda);
 
 
 //Login

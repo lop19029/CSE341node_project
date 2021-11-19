@@ -71,6 +71,18 @@ exports.postAddAgenda = (req, res, next) => {
     lPrayer, 
 
   } = req.body;
+// validation section not finished yet 
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).render('template', {
+      pageTitle: 'Add Agenda',
+      PagetoLoad: 'agenda-form',
+      SocialLinks: socialLinks,
+      errorMessage: errors.array()[0].msg
+    });
+  }
+
 
   const agenda = new Agenda({
     meetingDay: meetingDay,
@@ -90,7 +102,7 @@ exports.postAddAgenda = (req, res, next) => {
     tSpeaker: tSpeaker,
     tTopic: tTopic,
     lHymn: lHymn,
-    lPrayer: lPrayer,
+    lPrayer: lPrayer
   });
   agenda
   .save()
