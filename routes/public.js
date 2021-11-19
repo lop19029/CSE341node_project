@@ -1,23 +1,29 @@
+
+// Imports 
 const express = require('express');
 const User = require('../models/user');
-
 const {
     check,
     body
 } = require('express-validator');
 
-const publicController = require('../controllers/public');
+//controlers
 const router = express.Router();
-
-/**************** Andres ********************/ 
+const publicController = require('../controllers/public');
+const agendaController = require('../controllers/agenda');
 const isAuth = require('../middleware/is-auth');
+
 
 //Home
 router.get('/', publicController.getIndex);
-//About
-router.get('/agendas', isAuth, publicController.getAgendas);
-//Services
-router.get('/add-agenda', isAuth, publicController.getAddAgenda);
+// render agenda page
+router.get('/agendas', isAuth, agendaController.getAgendas);
+
+//add agendas 
+router.get('/add-agenda', isAuth, agendaController.getAddAgenda);
+router.post('/add-agenda', isAuth, agendaController.postAddAgenda);
+
+
 //Login
 //router.get('/login', publicController.getLogin);
 //router.post('/auth/login', publicController.postLogin);

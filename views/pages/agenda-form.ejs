@@ -5,10 +5,10 @@
         <% if(errorMessage) { %>
         <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
         <% } %>
-        <form action="" method="POST">
+        <form action="/add-agenda" method="POST">
             <p>Date:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'MeetingDay') ?  'invalid' : '' %>" type="date"
-                name="MeetingDay" required value="<%= oldInput.MeetingDay %>">
+            <input class="<%= validationErrors.find(e => e.param === 'meetingDay') ?  'invalid' : '' %>" type="date"
+                name="meetingDay" required value="<%= oldInput.MeetingDay %>">
             <p>Presiding Authority:</p>
             <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is presiding the meeting?" name="presiding" value="<%= oldInput.presiding %>">
@@ -17,24 +17,24 @@
                 required placeholder="Who is leading the meeting?" name="leading" value="<%= oldInput.leading %>">
             <hr>
             <p>Authorities Acknowledgment:</p>
-            <textarea name="" placeholder="Authorities Acknowledgment"></textarea>
+            <textarea name="authorities" placeholder="Authorities Acknowledgment"></textarea>
             <p>Piano Player:</p>
-            <input type="text" placeholder="Who is playing the piano?">
+            <input name="pPlayer" type="text" placeholder="Who is playing the piano?">
             <p>Music Director:</p>
-            <input type="text" placeholder="Who is directing the music?">
+            <input name="mDirector" type="text" placeholder="Who is directing the music?">
             <p>First Hymn:</p>
-            <input type="text" placeholder="What is the first hymn?">
+            <input name="fHymn" type="text" placeholder="What is the first hymn?">
             <p>First Prayer:</p>
-            <input type="text" placeholder="What is the first prayer?">
+            <input name="fPrayer" type="text" placeholder="What is the first prayer?">
             <hr>
             <p>Ward Affairs:</p>
-            <textarea placeholder="What are the Ward Affairs?"></textarea>
+            <textarea name="wAffairs" placeholder="What are the Ward Affairs?"></textarea>
             <p>Stake Affairs</p>
             <hr>
             <h2>Sacrament Time</h2>
             <br>
             <p>Sacrament Hymn:</p>
-            <input type="text" placeholder="What is the sacrament hymn?">
+            <input name="sHymn" type="text" placeholder="What is the sacrament hymn?">
             <hr>
             <h2>Select if it's a Normal or a Fast Meeting</h2>
             <div id="nfoptions">
@@ -44,28 +44,28 @@
             <hr>
             <div id="isNormalMeeting">
                 <p>First Talk Speaker:</p>
-                <input type="text" placeholder="Who is the First Talk Speaker?">
+                <input name="fSpeaker" type="text" placeholder="Who is the First Talk Speaker?">
                 <p>First Talk Topic:</p>
-                <input type="text" placeholder="Who is the First Talk Topic?">
+                <input name="fTopic" type="text" placeholder="Who is the First Talk Topic?">
                 <br>
                 <br>
                 <p>Second Talk Speaker:</p>
-                <input type="text" placeholder="Who is the Second Talk Speaker?">
+                <input name="sSpeaker" type="text" placeholder="Who is the Second Talk Speaker?">
                 <p>Second Talk Topic:</p>
-                <input type="text" placeholder="Who is the Second Talk Topic?">
+                <input name="sTopic" type="text" placeholder="Who is the Second Talk Topic?">
                 <br>
                 <br>
                 <p>Third Talk Speaker:</p>
-                <input type="text" placeholder="Who is the Third Talk Speaker?">
+                <input name="tSpeaker" type="text" placeholder="Who is the Third Talk Speaker?">
                 <p>Third Talk Topic:</p>
-                <input type="text" placeholder="Who is the Third Talk Topic?">
+                <input name="tTopic" type="text" placeholder="Who is the Third Talk Topic?">
                 <hr>
             </div>
             <div id="finalAgendaOptions">
                 <p>Last Hymn:</p>
-                <input type="text" placeholder="What is the last hymn?">
+                <input name="lHymn" type="text" placeholder="What is the last hymn?">
                 <p>Last Prayer:</p>
-                <input type="text" placeholder="What is the Last prayer?">
+                <input name="lPrayer" type="text" placeholder="What is the Last prayer?">
             </div>
             <button disabled id="btn-agenda">Create</button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

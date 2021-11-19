@@ -54,29 +54,6 @@ exports.getAgendas = (req, res, next) => {
         SocialLinks: socialLinks
     });
   };*/
-//Services
-
-exports.getAddAgenda = (req, res, next) => {
-    let message = req.flash('error');
-    if (message.length > 0) {
-        message = message[0];
-    } else {
-        message = null;
-    }
-    res.render('template', {
-        pageTitle: 'Add Agenda',
-        PagetoLoad: 'agenda-form',
-        SocialLinks: socialLinks,
-        errorMessage: message,
-        oldInput: {
-            presiding: '',
-            leading: '',
-            MeetingDay: ''
-        },
-        validationErrors: []
-    });
-};
-
 
 
 
