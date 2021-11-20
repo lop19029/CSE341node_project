@@ -32,10 +32,11 @@ exports.getAddAgenda = (req, res, next) => {
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
       errorMessage: message,
+      editing: false,
       oldInput: {
           presiding: '',
           leading: '',
-          MeetingDay: ''
+          meetingDay: ''
       },
       validationErrors: []
   });
@@ -43,6 +44,7 @@ exports.getAddAgenda = (req, res, next) => {
 
 // Add an Agenda
 exports.postAddAgenda = (req, res, next) => {
+  console.log("Lets create an agenda!");
   const {
     meetingDay,
     presiding,
@@ -64,18 +66,19 @@ exports.postAddAgenda = (req, res, next) => {
     lPrayer, 
 
   } = req.body;
-// TODO: validation section not finished yet 
-  const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    return res.status(422).render('template', {
-      pageTitle: 'Add Agenda',
-      PagetoLoad: 'agenda-form',
-      SocialLinks: socialLinks,
-      errorMessage: errors.array()[0].msg,
-      validationErrors: []
-    });
-  }
+// TODO: validation section not finished yet 
+  // const errors = validationResult(req);
+
+  // if (!errors.isEmpty()) {
+  //   return res.status(422).render('template', {
+  //     pageTitle: 'Add Agenda',
+  //     PagetoLoad: 'agenda-form',
+  //     SocialLinks: socialLinks,
+  //     errorMessage: errors.array()[0].msg,
+  //     validationErrors: []
+  //   });
+  // }
 
 
   const agenda = new Agenda({
@@ -119,6 +122,7 @@ exports.postAddAgenda = (req, res, next) => {
 exports.getAgendas = (req, res, next) => {
   Agenda.find()
     .then(agendas => {
+      console.log("Loading agendas display");
       res.render('template', {
               pageTitle: 'Agendas',
               PagetoLoad: 'agendas',
@@ -135,19 +139,27 @@ exports.getAgendas = (req, res, next) => {
 
 //Get agenda by id
 exports.getAgenda = (req, res, next) => {
+  //Check for error message
+  let message = req.flash('error');
+  if (message.length > 0) {
+      message = message[0];
+  } else {
+      message = null;
+  }
   const agendaId = req.params.agendaId;
   Agenda.findById(agendaId)
     .then(agenda => {
+      console.log(agenda);
       res.render('template', {
         pageTitle: 'View Agenda',
-        PagetoLoad: "#", //TODO: Include a page to load 
+        PagetoLoad: "#", //TODO: Include a page to display agendas
         SocialLinks: socialLinks,
         agenda: agenda,
         errorMessage: message,
         oldInput: {
             presiding: '',
             leading: '',
-            MeetingDay: ''
+            meetingDay: ''
         },
         validationErrors: []
     });
@@ -165,26 +177,37 @@ exports.getAgenda = (req, res, next) => {
 
 //Load populated edit form
 exports.getEditAgenda = (req, res, next) => {
-  const editMode = req.query.edit; // TODO: Make sure to pass edit=true when loading the edit view
+  const editMode = req.query.edit;
   if (!editMode) {
-    return res.redirect('/');
+    return res.redirect('/agendas');
   }
+  //Check for error message
+  let message = req.flash('error');
+  if (message.length > 0) {
+      message = message[0];
+  } else {
+      message = null;
+  }
+
   const agendaId = req.params.agendaId;
   Agenda.findById(agendaId)
     .then(agenda => {
       if (!agenda) {
-        return res.redirect('/');
+        return res.redirect('/agendas');
       }
+      console.log("Agenda to edit:");
+      console.log(agenda);
       res.render('template', {
         pageTitle: 'Edit Agenda',
         PagetoLoad: 'agenda-form',
         SocialLinks: socialLinks,
         errorMessage: message,
         agenda: agenda,
+        editing: true,
         oldInput: {
             presiding: '',
             leading: '',
-            MeetingDay: ''
+            meetingDay: ''
         },
         validationErrors: []
     });
@@ -197,7 +220,7 @@ exports.getEditAgenda = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-  const agendaId = req.body.agendaId; //TODO: Make sure to pass agenda Id when posting edit
+  const agendaId = req.body.agendaId;
   const updatedMeetingDay = req.body.meetingDay;
   const updatedPresiding = req.body.presiding;
   const updatedLeading = req.body.leading;
@@ -205,7 +228,7 @@ exports.postEditProduct = (req, res, next) => {
   const updatedpPlayer = req.body.pPlayer;
   const updatedmDirector = req.body.mDirector;
   const updatedfHymn = req.body.fHymn;
-  const updatedafPrayer= req.body.fPrayer;
+  const updatedfPrayer= req.body.fPrayer;
   const updatedwAffairs = req.body.wAffairs;
   const updatedsHymn = req.body.sHymn;
   const updatedfSpeaker = req.body.fSpeaker;
@@ -278,7 +301,7 @@ exports.postEditProduct = (req, res, next) => {
       return agenda.save()
       .then(result => {
         console.log('Agenda updated!');
-        res.redirect('#'); // TODO: Redirect somewhere
+        res.redirect('/agendas');
       });
     })
     .catch(err => {

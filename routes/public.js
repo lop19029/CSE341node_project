@@ -18,12 +18,13 @@ const isAuth = require('../middleware/is-auth');
 router.get('/', publicController.getIndex);
 // render agenda page
 router.get('/agendas', isAuth, agendaController.getAgendas);
+//Display agenda by id
+router.get('/view-agenda/:agendaId', isAuth, agendaController.getAgenda);
 
 //add agendas 
 router.get('/add-agenda', isAuth, agendaController.getAddAgenda);
-router.post('/add-agenda',
 
-// validation section not finished yet 
+router.post('/add-agenda', // validation section not finished yet 
 [
 body('meetingDay', 'Please Enter the date of the meeting.')
 .isEmpty()
@@ -31,6 +32,9 @@ body('meetingDay', 'Please Enter the date of the meeting.')
 ],
 isAuth, agendaController.postAddAgenda);
 
+//edit agenda
+router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
+router.post('/edit-agenda', isAuth, agendaController.postEditProduct);
 
 //Login
 //router.get('/login', publicController.getLogin);
