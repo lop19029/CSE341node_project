@@ -15,16 +15,9 @@ const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
 const Agenda = require('../models/agenda');
 
-
-//Displays all agendas
-exports.getAgendas = (req, res, next) => {
-  res.render('template', {
-      pageTitle: 'Agendas',
-      PagetoLoad: 'agendas',
-      SocialLinks: socialLinks
-  });
-};
-
+//
+//CREATE
+//
 
 //Display agenda form view 
 exports.getAddAgenda = (req, res, next) => {
@@ -71,7 +64,7 @@ exports.postAddAgenda = (req, res, next) => {
     lPrayer, 
 
   } = req.body;
-// validation section not finished yet 
+// TODO: validation section not finished yet 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -79,7 +72,8 @@ exports.postAddAgenda = (req, res, next) => {
       pageTitle: 'Add Agenda',
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
-      errorMessage: errors.array()[0].msg
+      errorMessage: errors.array()[0].msg,
+      validationErrors: []
     });
   }
 
@@ -115,4 +109,199 @@ exports.postAddAgenda = (req, res, next) => {
   });
 
  
+};
+
+//
+// READ
+//
+
+//Get all agendas
+exports.getAgendas = (req, res, next) => {
+  Agenda.find()
+    .then(agendas => {
+      res.render('template', {
+              pageTitle: 'Agendas',
+              PagetoLoad: 'agendas',
+              SocialLinks: socialLinks,
+              agendas: agendas
+          });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+//Get agenda by id
+exports.getAgenda = (req, res, next) => {
+  const agendaId = req.params.agendaId;
+  Agenda.findById(agendaId)
+    .then(agenda => {
+      res.render('template', {
+        pageTitle: 'View Agenda',
+        PagetoLoad: "#", //TODO: Include a page to load 
+        SocialLinks: socialLinks,
+        agenda: agenda,
+        errorMessage: message,
+        oldInput: {
+            presiding: '',
+            leading: '',
+            MeetingDay: ''
+        },
+        validationErrors: []
+    });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+//
+// UPDATE
+//
+
+//Load populated edit form
+exports.getEditAgenda = (req, res, next) => {
+  const editMode = req.query.edit; // TODO: Make sure to pass edit=true when loading the edit view
+  if (!editMode) {
+    return res.redirect('/');
+  }
+  const agendaId = req.params.agendaId;
+  Agenda.findById(agendaId)
+    .then(agenda => {
+      if (!agenda) {
+        return res.redirect('/');
+      }
+      res.render('template', {
+        pageTitle: 'Edit Agenda',
+        PagetoLoad: 'agenda-form',
+        SocialLinks: socialLinks,
+        errorMessage: message,
+        agenda: agenda,
+        oldInput: {
+            presiding: '',
+            leading: '',
+            MeetingDay: ''
+        },
+        validationErrors: []
+    });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.postEditProduct = (req, res, next) => {
+  const agendaId = req.body.agendaId; //TODO: Make sure to pass agenda Id when posting edit
+  const updatedMeetingDay = req.body.meetingDay;
+  const updatedPresiding = req.body.presiding;
+  const updatedLeading = req.body.leading;
+  const updatedAuthorities= req.body.authorities;
+  const updatedpPlayer = req.body.pPlayer;
+  const updatedmDirector = req.body.mDirector;
+  const updatedfHymn = req.body.fHymn;
+  const updatedafPrayer= req.body.fPrayer;
+  const updatedwAffairs = req.body.wAffairs;
+  const updatedsHymn = req.body.sHymn;
+  const updatedfSpeaker = req.body.fSpeaker;
+  const updatedfTopic = req.body.fTopic;
+  const updatedsSpeaker = req.body.sSpeaker;
+  const updatedsTopic = req.body.sTopic;
+  const updatedtSpeaker= req.body.tSpeaker;
+  const updatedtTopic = req.body.tTopic;
+  const updatedlHymn = req.body.lHymn;
+  const updatedlPrayer = req.body.lPrayer;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).render('template', {
+      pageTitle: 'Add Agenda',
+      PagetoLoad: 'agenda-form',
+      SocialLinks: socialLinks,
+      errorMessage: errors.array()[0].msg,
+      agenda: {
+        meetingDay: updatedMeetingDay,
+        presiding: updatedPresiding,
+        leading: updatedLeading,
+        authorities: updatedAuthorities,
+        pPlayer: updatedpPlayer,
+        mDirector: updatedmDirector,
+        fHymn: updatedfHymn,
+        fPrayer: updatedfPrayer,
+        wAffairs: updatedwAffairs,
+        sHymn: updatedsHymn,
+        fSpeaker: updatedfSpeaker,
+        fTopic: updatedfTopic,
+        sSpeaker: updatedsSpeaker,
+        sTopic: updatedsTopic,
+        tSpeaker: updatedtSpeaker,
+        tTopic: updatedtTopic,
+        lHymn: updatedlHymn,
+        lPrayer: updatedlPrayer
+      },
+      validationErrors: []
+    });
+  }
+    
+    Agenda.findById(agendaId)
+    .then(agenda => {
+      //
+      // TODO: If needed, Check if the user trying to edit is the one who created the agenda  or has the role to that
+      //
+      // if(agenda.userId.toString() !== req.user._id.toString()) {
+      //   return res.redirect('/');
+      // }
+      agenda.meetingDay = updatedMeetingDay,
+      agenda.presiding = updatedPresiding,
+      agenda.leading = updatedLeading,
+      agenda.authorities = updatedAuthorities,
+      agenda.pPlayer = updatedpPlayer,
+      agenda.mDirector = updatedmDirector,
+      agenda.fHymn = updatedfHymn,
+      agenda.fPrayer = updatedfPrayer,
+      agenda.wAffairs = updatedwAffairs,
+      agenda.sHymn = updatedsHymn,
+      agenda.fSpeaker = updatedfSpeaker,
+      agenda.fTopic = updatedfTopic,
+      agenda.sSpeaker = updatedsSpeaker,
+      agenda.sTopic = updatedsTopic,
+      agenda.tSpeaker = updatedtSpeaker,
+      agenda.tTopic = updatedtTopic,
+      agenda.lHymn = updatedlHymn,
+      agenda.lPrayer = updatedlPrayer
+      return agenda.save()
+      .then(result => {
+        console.log('Agenda updated!');
+        res.redirect('#'); // TODO: Redirect somewhere
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+//
+// DELETE
+//
+
+exports.postDeleteAgenda = (req, res, next) => {
+  const agendaId = req.body.productId;
+  Agenda.deleteOne({_id: agendaId})
+    .then(() => {
+      console.log('Agenda destroyed!');
+      res.redirect('#'); // TODO: Redirect Somewhere
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
