@@ -34,9 +34,24 @@ exports.getAddAgenda = (req, res, next) => {
       errorMessage: message,
       editing: false,
       oldInput: {
-          presiding: '',
-          leading: '',
-          meetingDay: ''
+        meetingDay: '',
+        presiding:  '',
+        leading: '',
+        authorities: '',
+        pPlayer: '', 
+        mDirector: '',
+        fHymn: '',
+        fPrayer: '',
+        wAffairs: '', 
+        sHymn: '',
+        fSpeaker: '',
+        fTopic:'',
+        sSpeaker: '',
+        sTopic:'',
+        tSpeaker:'',
+        tTopic:'',
+        lHymn: '',
+        lPrayer: ''
       },
       validationErrors: []
   });
@@ -67,19 +82,41 @@ exports.postAddAgenda = (req, res, next) => {
 
   } = req.body;
 
-// TODO: validation section not finished yet 
-  // const errors = validationResult(req);
+// Validation 
+   const errors = validationResult(req);
 
-  // if (!errors.isEmpty()) {
-  //   return res.status(422).render('template', {
-  //     pageTitle: 'Add Agenda',
-  //     PagetoLoad: 'agenda-form',
-  //     SocialLinks: socialLinks,
-  //     errorMessage: errors.array()[0].msg,
-  //     validationErrors: []
-  //   });
-  // }
-
+   if (!errors.isEmpty()) {
+    console.log(errors.array());
+     return res.status(422).render('template', {
+      pageTitle: 'Add Agenda',
+      PagetoLoad: 'agenda-form',
+      SocialLinks: socialLinks,
+      editing: false,
+       errorMessage: errors.array()[0].msg,
+       oldInput:{
+        meetingDay: meetingDay,
+        presiding:  presiding,
+        leading: leading,
+        authorities: authorities,
+        pPlayer: pPlayer, 
+        mDirector: mDirector,
+        fHymn: fHymn,
+        fPrayer: fPrayer,
+        wAffairs: wAffairs, 
+        sHymn: sHymn,
+        fSpeaker: fSpeaker,
+        fTopic: fTopic,
+        sSpeaker: sSpeaker,
+        sTopic: sTopic,
+        tSpeaker: tSpeaker,
+        tTopic: tTopic,
+        lHymn: lHymn,
+        lPrayer: lPrayer
+       },
+       validationErrors: errors.array()
+     });
+     console.log(oldInput);
+   }
 
   const agenda = new Agenda({
     meetingDay: meetingDay,
