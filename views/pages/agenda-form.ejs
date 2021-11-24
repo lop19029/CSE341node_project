@@ -1,6 +1,6 @@
 <div class="agenda-form-page">
     <div class="login-box box-5 box-i-7 box-m-10 box-p-12">
-        <h1>Add Agenda</h1>
+        <h1><% if (editing) {%>Edit<% } else { %>Add<% } %> Agenda</h1>
         <hr>
         <% if(errorMessage) { %>
         <p class="tbold fs20px lh2em tac error-message"><%= errorMessage%></p>
@@ -16,7 +16,7 @@
             <p>Leading Authority:</p>
             <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is leading the meeting?" name="leading"
-                value="<% if (editing) { %><%=agenda.presiding%><% } %>" value="<%= oldInput.leading %>">
+                value="<% if (editing) { %><%=agenda.leading%><% } %>" value="<%= oldInput.leading %>">
             <hr>
             <p>Authorities Acknowledgment:</p>
             <textarea name="authorities" placeholder="Authorities Acknowledgment"><% if (editing) { %><%=agenda.authorities%><% } %></textarea>
