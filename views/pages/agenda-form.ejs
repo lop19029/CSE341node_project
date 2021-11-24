@@ -37,12 +37,14 @@
             <br>
             <p>Sacrament Hymn:</p>
             <input name="sHymn" type="text" placeholder="What is the sacrament hymn?" value="<% if (editing) { %><%=agenda.sHymn%><% } %>">
+            <% if (!editing) { %>
             <hr>
             <h2>Select if it's a Normal or a Fast Meeting</h2>
             <div id="nfoptions">
                 <span id="nMeetingBtn">Normal</span>
                 <span id="fMeetingBtn">Fast</span>
             </div>
+            <% } %>
             <hr>
             <div id="isNormalMeeting">
                 <p>First Talk Speaker:</p>
@@ -69,7 +71,7 @@
                 value="<% if (editing) { %><%=agenda.tTopic%><% } %>">
                 <hr>
             </div>
-            <div id="finalAgendaOptions">
+            <div id="finalAgendaOptions" <% if (editing) { %> style="display: block" <% } %>> 
                 <p>Last Hymn:</p>
                 <input name="lHymn" type="text" placeholder="What is the last hymn?" 
                 value="<% if (editing) { %><%=agenda.lHymn%><% } %>">
