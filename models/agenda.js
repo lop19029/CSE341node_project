@@ -37,7 +37,6 @@ const normalAngendaSchema = new Schema({
   },
   wAffairs: {
     type: String,
-    required: true,
     default:null
   },
   sHymn: {
@@ -81,7 +80,11 @@ const normalAngendaSchema = new Schema({
   lPrayer: {
     type: String,
     required: true
-  }   
+  },  
+  meetingKind: {
+    type: String,
+    required: true
+  }    
 });
 
 module.exports = mongoose.model('Agenda', normalAngendaSchema);

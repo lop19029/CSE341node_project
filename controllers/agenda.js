@@ -34,24 +34,24 @@ exports.getAddAgenda = (req, res, next) => {
       errorMessage: message,
       editing: false,
       oldInput: {
-        meetingDay: '',
-        presiding:  '',
-        leading: '',
-        authorities: '',
-        pPlayer: '', 
+        meetingDay:'',
+        presiding:'',
+        leading:'',
+        authorities:'',
+        pPlayer:'', 
         mDirector: '',
-        fHymn: '',
-        fPrayer: '',
-        wAffairs: '', 
-        sHymn: '',
-        fSpeaker: '',
+        fHymn:'',
+        fPrayer:'',
+        wAffairs:'', 
+        sHymn:'',
+        fSpeaker:'',
         fTopic:'',
-        sSpeaker: '',
+        sSpeaker:'',
         sTopic:'',
         tSpeaker:'',
         tTopic:'',
-        lHymn: '',
-        lPrayer: ''
+        lHymn:'',
+        lPrayer:''
       },
       validationErrors: []
   });
@@ -59,7 +59,6 @@ exports.getAddAgenda = (req, res, next) => {
 
 // Add an Agenda
 exports.postAddAgenda = (req, res, next) => {
-  console.log("Lets create an agenda!");
   const {
     meetingDay,
     presiding,
@@ -78,7 +77,8 @@ exports.postAddAgenda = (req, res, next) => {
     tSpeaker,
     tTopic,
     lHymn,
-    lPrayer, 
+    lPrayer,
+    meetingKind 
 
   } = req.body;
 
@@ -111,13 +111,13 @@ exports.postAddAgenda = (req, res, next) => {
         tSpeaker: tSpeaker,
         tTopic: tTopic,
         lHymn: lHymn,
-        lPrayer: lPrayer
+        lPrayer: lPrayer,
+        meetingKind : meetingKind
        },
        validationErrors: errors.array()
      });
-     console.log(oldInput);
    }
-
+   
   const agenda = new Agenda({
     meetingDay: meetingDay,
     presiding:  presiding,
@@ -136,7 +136,8 @@ exports.postAddAgenda = (req, res, next) => {
     tSpeaker: tSpeaker,
     tTopic: tTopic,
     lHymn: lHymn,
-    lPrayer: lPrayer
+    lPrayer: lPrayer,
+    meetingKind : meetingKind
   });
   agenda
   .save()

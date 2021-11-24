@@ -8,26 +8,26 @@
         <form action="/<% if (editing) {%>edit-agenda<% } else { %>add-agenda<% } %>" method="POST">
             <p>Date:</p>
             <input class="<%= validationErrors.find(e => e.param === 'meetingDay') ?  'invalid' : '' %>" type="date" 
-            name="meetingDay" required value="<% if (editing) { %><%=agenda.meetingDay%><% } %>" ><!-- value=" oldInput.meetingDay " -->
+            name="meetingDay" required value="<% if (editing) { %><%=agenda.meetingDay%><% } %>" value="<%= oldInput.meetingDay %>">
             <p>Presiding Authority:</p>
             <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is presiding the meeting?" name="presiding" 
-                value="<% if (editing) { %><%=agenda.presiding%><% } %>"><!-- value=" oldInput.presiding" -->  
+                value="<% if (editing) { %><%=agenda.presiding%><% } %>" value="<%= oldInput.presiding %>">  
             <p>Leading Authority:</p>
             <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is leading the meeting?" name="leading"
-                value="<% if (editing) { %><%=agenda.presiding%><% } %>"><!-- value=" oldInput.leading " -->
+                value="<% if (editing) { %><%=agenda.presiding%><% } %>" value="<%= oldInput.leading %>">
             <hr>
             <p>Authorities Acknowledgment:</p>
             <textarea name="authorities" placeholder="Authorities Acknowledgment"><% if (editing) { %><%=agenda.authorities%><% } %></textarea>
             <p>Piano Player:</p>
-            <input name="pPlayer" type="text" placeholder="Who is playing the piano?" value="<% if (editing) { %><%=agenda.pPlayer%><% } %>">
+            <input name="pPlayer" type="text" placeholder="Who is playing the piano?" value="<% if (editing) { %><%=agenda.pPlayer%><% } %>" value="<%= oldInput.pPlayer %>">
             <p>Music Director:</p>
-            <input name="mDirector" type="text" placeholder="Who is directing the music?" value="<% if (editing) { %><%=agenda.mDirector%><% } %>">
+            <input name="mDirector" type="text" placeholder="Who is directing the music?" value="<% if (editing) { %><%=agenda.mDirector%><% } %>" value="<%= oldInput.mDirector %>">
             <p>First Hymn:</p>
-            <input name="fHymn" type="text" placeholder="What is the first hymn?" value="<% if (editing) { %><%=agenda.fHymn%><% } %>">
+            <input name="fHymn" type="text" placeholder="What is the first hymn?" value="<% if (editing) { %><%=agenda.fHymn%><% } %>" value="<%= oldInput.fHymn %>">
             <p>First Prayer:</p>
-            <input name="fPrayer" type="text" placeholder="What is the first prayer?" value="<% if (editing) { %><%=agenda.fPrayer%><% } %>">
+            <input name="fPrayer" type="text" placeholder="What is the first prayer?" value="<% if (editing) { %><%=agenda.fPrayer%><% } %>" value="<%= oldInput.fPrayer %>">
             <hr>
             <p>Ward Affairs:</p>
             <textarea name="wAffairs" placeholder="What are the Ward Affairs?"><% if (editing) { %><%=agenda.wAffairs%><% } %></textarea>
