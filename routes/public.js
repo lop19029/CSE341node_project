@@ -117,6 +117,8 @@ isAuth, agendaController.postAddAgenda);
 //edit agenda
 router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
 router.post('/edit-agenda', isAuth, agendaController.postEditProduct);
+// Email to clerk (route)
+router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
 
 //Login
 //router.get('/login', publicController.getLogin);
@@ -194,5 +196,6 @@ router.get('/500', publicController.get500);
 router.use(publicController.use404);
 //Errors Handling
 router.use(publicController.use500);
+
 
 module.exports = router;

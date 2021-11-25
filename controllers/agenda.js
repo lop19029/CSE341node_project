@@ -14,7 +14,17 @@ const socialLinks = {
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
 const Agenda = require('../models/agenda');
-
+const nodemailer = require('nodemailer');
+// Transporter
+const transporter = nodemailer.createTransport({
+  host: "mail.sacredplanner.xyz",
+  port: 465,
+  secure: true,
+  auth: {
+      user: "nodemailer@sacredplanner.xyz", // generated ethereal user
+      pass: "mTtBAXRdEf" // generated ethereal password
+  }
+});
 //
 //CREATE
 //
@@ -158,17 +168,20 @@ exports.postAddAgenda = (req, res, next) => {
 
 //Get all agendas
 exports.getAgendas = (req, res, next) => {
+  
   Agenda.find()
     .then(agendas => {
-      console.log("Loading agendas display");
+     console.log("Loading agendas display");
       res.render('template', {
               pageTitle: 'Agendas',
               PagetoLoad: 'agendas',
               SocialLinks: socialLinks,
               agendas: agendas
           });
+        
     })
     .catch(err => {
+     
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -366,3 +379,101 @@ exports.postDeleteAgenda = (req, res, next) => {
       return next(error);
     });
 };
+
+// Email to clerk
+exports.getEmailtoClerk = (req, res, next) => {
+  const senderE = req.query.sender;
+  if(senderE){
+    res.locals.sending = true;
+  }
+  if(senderE == undefined){
+    res.locals.sending = false;
+  }
+  let message = req.flash('error');
+  if (message.length > 0) {
+      message = message[0];
+  } else {
+      message = null;
+  }
+  const agendaId = req.params.agendaId;
+  Agenda.findById(agendaId)
+    .then(agenda => {   
+      
+      console.log(agenda);
+      
+      transporter.sendMail({
+        to: res.locals.mail, //Please add your personal email where you'll receive the contact form response
+        from: 'contact@sacredplanner.xyz',
+        subject: 'The Sacred Planner - Agenda',
+        html: `
+                <h1 style='text-align: center;'>The Agenda is ready</h1>
+                <hr>
+                <ul style='line-height: 2em;'>
+                  <li><strong>Date: </strong>${agenda.meetingDay}</li>
+                  <li><strong>Presiding: </strong>${agenda.presiding}</li>
+                  <li><strong>Leading: </strong>${agenda.leading}</li>
+                </ul>
+                <hr>
+                <ul style='line-height: 2em;'>
+                  <li><strong>Music: </strong>${agenda.pPlayer}</li>
+                  <li><strong>Music Director: </strong>${agenda.mDirector}</li>
+                  <li><strong>First Hymn: </strong>${agenda.fHymn}</li>
+                  <li><strong>First Prayer: </strong>${agenda.fPrayer}</li>
+                </ul>
+                <hr>
+                <ul style='line-height: 2em;'>
+                  <li><strong>Authorities Acknowledgment: </strong>${agenda.authorities}</li>
+                  <li><strong>Ward Affairs: </strong>${agenda.wAffairs}</li>
+                  <li><strong>Sacrament Hymn: </strong>${agenda.sHymn}</li>
+                </ul>
+                <hr>
+                <ul style='line-height: 2em;'>
+                  <li><strong>First Speaker: </strong>${agenda.fSpeaker}</li>
+                  <li><strong>Topic: </strong>${agenda.fTopic}</li>
+                  <li><strong>Second Speaker: </strong>${agenda.sSpeaker}</li>
+                  <li><strong>Topic: </strong>${agenda.sTopic}</li>
+                  <li><strong>Third Speaker: </strong>${agenda.tSpeaker}</li>
+                  <li><strong>Topic: </strong>${agenda.tTopic}</li>
+                </ul>
+                <hr> 
+              
+                <ul style='line-height: 2em;'>
+                  <li><strong>Last Hymn: </strong>${agenda.lHymn}</li>
+                  <li><strong>Ward Last Prayer: </strong>${agenda.lPrayer}</li>
+                </ul>
+                <p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
+              `
+      }).then(function (success) {
+          req.flash('error', 'Mensaje Enviado Correctamente!');
+          res.redirect('/');
+     }).catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+      
+      Agenda.find()
+      .then(agendas => {
+         res.render('template', {
+                pageTitle: 'Agendas',
+                PagetoLoad: 'agendas',
+                SocialLinks: socialLinks,
+                agendas: agendas
+            });
+            
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+   
+    
+   
+}

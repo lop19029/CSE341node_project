@@ -57,6 +57,7 @@ app.use(
   app.use((req, res, next) => {
       res.locals.isAuthenticated = req.session.isLoggedIn;
       res.locals.isAdded = req.session.isAdded;
+      res.locals.sending = req.session.sending;
       res.locals.csrfToken = req.csrfToken();  
       next();
     });
@@ -72,6 +73,7 @@ app.use(
           }
           req.user = user;
           res.locals.name = user.uName;
+          res.locals.mail = user.email;
           next();
         })
         .catch(err => {
