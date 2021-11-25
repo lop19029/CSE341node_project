@@ -1,28 +1,39 @@
-<h1>View Agenda</h1>
-<p>Date: <%=agenda.meetingDay%></p>
-<p>Presiding Authority: <%=agenda.presiding%></p>
-<p>Leading Authority: <%=agenda.leading%></p>
-<hr>
-<p>Authorities Acknowledgment:</p>
-<p><%=agenda.authorities%></p>
-<p>Piano Player: <%=agenda.pPlayer%></p>
-<p>Music Director: <%=agenda.mDirector%></p>
-<p>First Hymn: <%=agenda.fHymn%></p>
-<p>First Prayer: <%=agenda.fPrayer%></p>
-<hr>
-<p>Ward Affairs:</p>
-<p><%=agenda.wAffairs%></p>
-<p>Stake Affairs</p>
-<hr>
-<h2>Sacrament Time</h2>
-<br>
-<p>Sacrament Hymn: <%=agenda.sHymn%></p>
-<p>First Talk Speaker: <%=agenda.fSpeaker%></p>
-<p>First Talk Topic: <%=agenda.fTopic%></p>
-<p>Second Talk Speaker: <%=agenda.sSpeaker%></p>
-<p>Second Talk Topic: <%=agenda.sTopic%></p>
-<p>Third Talk Speaker: <%=agenda.tSpeaker%></p>
-<p>Third Talk Topic: <%=agenda.tTopic%></p>
-<hr>
-<p>Last Hymn: <%=agenda.lHymn%></p>
-<p>Last Prayer: <%=agenda.lPrayer%></p>
+<div class="view-agenda">
+    <div class="body">
+        <h1>Sacrament Meeting<br><%=agenda.meetingDay%></h1>
+        <br>
+        <hr>
+        <p class="scripture"><em><span>"</span>But notwithstanding those things which are written, it always has been
+                given to the elders of my church from the beginning, and ever shall be, to conduct all meetings as they
+                are directed and guided by the Holy Spirit.<span>"</span></em></p>
+        <hr>
+        <br>
+        <div class="agenda-body lh2em fs20px fs-i-19px fs-m-18px fs-p-17px">
+            <p><strong>Presiding Authority:</strong> <%=agenda.presiding%></p>
+            <p><strong>Leading Authority:</strong> <%=agenda.leading%></p>
+            <hr>
+            <p><strong>Authorities Acknowledgment:</strong> <%=agenda.authorities%></p>
+            <hr>
+            <p><strong>Piano Player:</strong> <%=agenda.pPlayer%></p>
+            <p><strong>Music Director:</strong> <%=agenda.mDirector%></p>
+            <p><strong>First Hymn:</strong> <%=agenda.fHymn%></p>
+            <p><strong>First Prayer:</strong> <%=agenda.fPrayer%></p>
+            <hr>
+            <p><strong>Ward Affairs:</strong> <%=agenda.wAffairs%></p>
+            <p><strong>Stake Affairs</strong></p>
+            <hr>
+            <h2>Sacrament Time</h2>
+            <hr>
+            <p><strong>Sacrament Hymn:</strong> <%=agenda.sHymn%></p>
+            <p><strong>First Talk Speaker:</strong> <%=agenda.fSpeaker%></p>
+            <p><strong>First Talk Topic:</strong> <%=agenda.fTopic%></p>
+            <p><strong>Second Talk Speaker:</strong> <%=agenda.sSpeaker%></p>
+            <p><strong>Second Talk Topic:</strong> <%=agenda.sTopic%></p>
+            <p><strong>Third Talk Speaker:</strong> <%=agenda.tSpeaker%></p>
+            <p><strong>Third Talk Topic:</strong> <%=agenda.tTopic%></p>
+            <hr>
+            <p><strong>Last Hymn:</strong> <%=agenda.lHymn%></p>
+            <p><strong>Last Prayer:</strong> <%=agenda.lPrayer%></p>
+        </div>
+    </div>
+</div>

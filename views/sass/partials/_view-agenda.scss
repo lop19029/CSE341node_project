@@ -1,0 +1,38 @@
+.view-agenda {
+    margin: 0px auto;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/banner/dashboard.jpg);
+    padding: 30px 10%;
+    min-height: calc(100vh - 70px);
+    .body {
+        background: rgba(255, 255, 255, 0.836); 
+        border-radius: 10px;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 10px;
+        h1 {
+            text-align: center;
+            color: $color1;
+        }
+        .scripture {
+            text-align: justify;
+            padding: 10px 5%;
+            color: rgb(83, 83, 83);
+            font-weight: bold;
+            line-height: 1.5em;
+            span {
+                color: black;
+                font-size: 20px;
+            }
+        }
+        .agenda-body {
+            padding: 0px 5%;
+            strong {
+                color: $color3;
+            }
+        }
+    }
+}
