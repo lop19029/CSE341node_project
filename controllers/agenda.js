@@ -267,6 +267,7 @@ exports.getEditAgenda = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
   const agendaId = req.body.agendaId;
+  res.locals.updateAgenda = req.body.updateAgenda;
   const updatedMeetingDay = req.body.meetingDay;
   const updatedPresiding = req.body.presiding;
   const updatedLeading = req.body.leading;
@@ -346,8 +347,25 @@ exports.postEditProduct = (req, res, next) => {
         agenda.lPrayer = updatedlPrayer
       return agenda.save()
         .then(result => {
+          res.locals.updateAgenda = 1;
+          console.log("udpate-metod: " + res.locals.updateAgenda);
           console.log('Agenda updated!');
-          res.redirect('/agendas');
+          //res.redirect('/agendas');
+          Agenda.find()
+          .then(agendas => {
+             res.render('template', {
+                    pageTitle: 'Agendas',
+                    PagetoLoad: 'agendas',
+                    SocialLinks: socialLinks,
+                    agendas: agendas
+                });
+                
+          })
+          .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+          });
         });
     })
     .catch(err => {
@@ -464,6 +482,7 @@ exports.getEmailtoClerk = (req, res, next) => {
         error.httpStatusCode = 500;
         return next(error);
       });
+      
     })
     .catch(err => {
       const error = new Error(err);

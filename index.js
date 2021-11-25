@@ -58,6 +58,7 @@ app.use(
       res.locals.isAuthenticated = req.session.isLoggedIn;
       res.locals.isAdded = req.session.isAdded;
       res.locals.sending = req.session.sending;
+      res.locals.updateAgenda = req.session.updateAgenda;
       res.locals.csrfToken = req.csrfToken();  
       next();
     });

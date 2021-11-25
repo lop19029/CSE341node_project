@@ -82,6 +82,7 @@
             <button type="submit" id="btn-agenda"><% if (editing) {%>Update Agenda<% } else { %>Create Agenda<% } %></button>
             <% if (editing) { %>
                 <input type="hidden" value="<%=agenda._id%>" name="agendaId">
+                <input type="hidden" value="<%=updateAgenda = 1%>" name="updateAgenda">
             <% } %>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <input type="hidden" name="meetingKind" id="meetingKind" value="">
