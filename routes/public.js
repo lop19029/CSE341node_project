@@ -27,98 +27,179 @@ router.get('/add-agenda', isAuth, agendaController.getAddAgenda);
 router.post('/add-agenda',
 // validation add agenda 
 [
-body('meetingDay', 'Please Enter the date of the meeting.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('meetingDay', 'Please Enter the date of the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('presiding', 'Please Enter who presides the meeting.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('presiding', 'Please Enter who presides the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('leading', 'Please Enter who leads the meeting.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('leading', 'Please Enter who leads the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('authorities', 'Invalid Imput.')
-.isString(),
+    body('authorities', 'Invalid Imput.')
+    .isString(),
 
-body('pPlayer', 'Please Enter the name of the Pianist.')
-.isString(),
+    body('pPlayer', 'Please Enter the name of the Pianist.')
+    .isString(),
 
-body('mDirector', 'Please Enter the music director.')
-.isString(),
+    body('mDirector', 'Please Enter the music director.')
+    .isString(),
 
-body('fHymn', 'Please fist hymn.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('fHymn', 'Please fist hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('fPrayer', 'Please enter opening prayer/convocation.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('fPrayer', 'Please enter opening prayer/convocation.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('wAffairs', 'Invalid Input')
-.isString(),
+    body('wAffairs', 'Invalid Input')
+    .isString(),
 
-body('sHymn', 'Please Enter the second hymn.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('sHymn', 'Please Enter the second hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
-body('fSpeaker', 'Imput')
-.isString(),
+    body('fSpeaker', 'Imput')
+    .isString(),
 
-body('fTopic', 'Invalid Imput.')
-.isString(),
+    body('fTopic', 'Invalid Imput.')
+    .isString(),
 
-body('sSpeaker', 'Invalid Imput.')
-.isString(),
+    body('sSpeaker', 'Invalid Imput.')
+    .isString(),
 
-body('sTopic', 'Invalid Imput.')
-.isString(),
+    body('sTopic', 'Invalid Imput.')
+    .isString(),
 
-body('tSpeaker', 'Invalid Imput.')
-.isString(),
+    body('tSpeaker', 'Invalid Imput.')
+    .isString(),
 
-body('tTopic', 'Invalid Imput.')
-.isString(),
-
-
-body('lHymn', 'Please Enter last Hymn.')
-.isString()
-.isLength({
-    min: 1
-}),
-
-body('lPrayer', 'Please Enter closing Prayer.')
-.isString()
-.isLength({
-    min: 1
-}),
+    body('tTopic', 'Invalid Imput.')
+    .isString(),
 
 
-body('meetingKind',)
-.isString(),
+    body('lHymn', 'Please Enter last Hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
+    body('lPrayer', 'Please Enter closing Prayer.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
 
 ],
 isAuth, agendaController.postAddAgenda);
 
 //edit agenda
 router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
-router.post('/edit-agenda', isAuth, agendaController.postEditProduct);
+router.post('/edit-agenda',
+
+[
+    body('meetingDay', 'Please Enter the date of the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('presiding', 'Please Enter who presides the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('leading', 'Please Enter who leads the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('authorities', 'Invalid Imput.')
+    .isString(),
+    
+    body('pPlayer', 'Please Enter the name of the Pianist.')
+    .isString(),
+    
+    body('mDirector', 'Please Enter the music director.')
+    .isString(),
+    
+    body('fHymn', 'Please fist hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('fPrayer', 'Please enter opening prayer/convocation.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('wAffairs', 'Invalid Input')
+    .isString(),
+    
+    body('sHymn', 'Please Enter the second hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('fSpeaker', 'Imput')
+    .isString(),
+    
+    body('fTopic', 'Invalid Imput.')
+    .isString(),
+    
+    body('sSpeaker', 'Invalid Imput.')
+    .isString(),
+    
+    body('sTopic', 'Invalid Imput.')
+    .isString(),
+    
+    body('tSpeaker', 'Invalid Imput.')
+    .isString(),
+    
+    body('tTopic', 'Invalid Imput.')
+    .isString(),
+    
+    
+    body('lHymn', 'Please Enter last Hymn.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('lPrayer', 'Please Enter closing Prayer.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+],
+
+isAuth, agendaController.postEditProduct);
 // Email to clerk (route)
 router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
+
+router.post('/delete-agenda/:agendaId',isAuth, agendaController.postDeleteAgenda)
 
 //Login
 //router.get('/login', publicController.getLogin);

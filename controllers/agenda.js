@@ -46,10 +46,10 @@ exports.getAddAgenda = (req, res, next) => {
     errorMessage: message,
     editing: false,
     oldInput: {
-      meetingDay: '',
-      presiding: '',
-      leading: '',
-      authorities: '',
+      meetingDay: 'qqweqweqwe',
+      presiding: 'qweqwe',
+      leading: 'qweqweqwe',
+      authorities: 'qweqweqw',
       pPlayer: '',
       mDirector: '',
       fHymn: '',
@@ -106,8 +106,8 @@ exports.postAddAgenda = (req, res, next) => {
       editing: false,
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        meetingDay: meetingDay,
-        presiding: presiding,
+        meetingDay: "esto es un test",
+        presiding: "vamos a ver",
         leading: leading,
         authorities: authorities,
         pPlayer: pPlayer,
@@ -122,8 +122,8 @@ exports.postAddAgenda = (req, res, next) => {
         sTopic: sTopic,
         tSpeaker: tSpeaker,
         tTopic: tTopic,
-        lHymn: lHymn,
-        lPrayer: lPrayer,
+        lHymn: "asdfasdasds",
+        lPrayer: "adedaed",
         meetingKind: meetingKind
       },
       validationErrors: errors.array()
@@ -251,9 +251,24 @@ exports.getEditAgenda = (req, res, next) => {
         agenda: agenda,
         editing: true,
         oldInput: {
+          meetingDay: '',
           presiding: '',
           leading: '',
-          meetingDay: ''
+          authorities: '',
+          pPlayer: '',
+          mDirector: '',
+          fHymn: '',
+          fPrayer: '',
+          wAffairs: '',
+          sHymn: '',
+          fSpeaker: '',
+          fTopic: '',
+          sSpeaker: '',
+          sTopic: '',
+          tSpeaker: '',
+          tTopic: '',
+          lHymn: '',
+          lPrayer: ''
         },
         validationErrors: []
       });
@@ -286,6 +301,7 @@ exports.postEditProduct = (req, res, next) => {
   const updatedtTopic = req.body.tTopic;
   const updatedlHymn = req.body.lHymn;
   const updatedlPrayer = req.body.lPrayer;
+  const updatedmeetingKind = req.body.meetingKind;
 
   const errors = validationResult(req);
 
@@ -294,6 +310,7 @@ exports.postEditProduct = (req, res, next) => {
       pageTitle: 'Add Agenda',
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
+      editing: true,
       errorMessage: errors.array()[0].msg,
       agenda: {
         meetingDay: updatedMeetingDay,
@@ -313,7 +330,8 @@ exports.postEditProduct = (req, res, next) => {
         tSpeaker: updatedtSpeaker,
         tTopic: updatedtTopic,
         lHymn: updatedlHymn,
-        lPrayer: updatedlPrayer
+        lPrayer: updatedlPrayer,
+        meetingKind: updatedmeetingKind,
       },
       validationErrors: []
     });
@@ -344,7 +362,8 @@ exports.postEditProduct = (req, res, next) => {
         agenda.tSpeaker = updatedtSpeaker,
         agenda.tTopic = updatedtTopic,
         agenda.lHymn = updatedlHymn,
-        agenda.lPrayer = updatedlPrayer
+        agenda.lPrayer = updatedlPrayer,
+        agenda.meetingkind = updatedmeetingKind
       return agenda.save()
         .then(result => {
           res.locals.updateAgenda = 1;
@@ -380,13 +399,14 @@ exports.postEditProduct = (req, res, next) => {
 //
 
 exports.postDeleteAgenda = (req, res, next) => {
-  const agendaId = req.body.productId;
+  console.log('está llegando');
+  const agendaId = req.body.agendaId;
   Agenda.deleteOne({
       _id: agendaId
     })
     .then(() => {
       console.log('Agenda destroyed!');
-      res.redirect('#'); // TODO: Redirect Somewhere
+      res.redirect('/agendas'); // TODO: Redirect Somewhere
     })
     .catch(err => {
       const error = new Error(err);

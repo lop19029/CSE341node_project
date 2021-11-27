@@ -37,7 +37,7 @@
             <br>
             <p>Sacrament Hymn:</p>
             <input name="sHymn" type="text" placeholder="What is the sacrament hymn?" value="<% if (editing) { %><%=agenda.sHymn%><% } %>">
-            <% if (!editing) { %>
+            <% if(!editing) { %>
             <hr>
             <h2>Select if it's a Normal or a Fast Meeting</h2>
             <div id="nfoptions">
@@ -85,7 +85,7 @@
                 <input type="hidden" value="<%=updateAgenda = 1%>" name="updateAgenda">
             <% } %>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <input type="hidden" name="meetingKind" id="meetingKind" value="">
+            <input type="hidden" name="meetingKind" id="meetingKind" value=" " >
         </form>
     </div>
 </div>
