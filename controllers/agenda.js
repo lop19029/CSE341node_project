@@ -63,7 +63,7 @@ exports.getAddAgenda = (req, res, next) => {
         tSpeaker: '',
         tTopic: '',
         lHymn: '',
-        lPrayer: ''
+        lPrayer: '  '
       },
       validationErrors: []
   });
@@ -247,25 +247,25 @@ exports.getEditAgenda = (req, res, next) => {
         errorMessage: message,
         agenda: agenda,
         editing: true,
-        oldInput: {
-          meetingDay: '',
-          presiding: '',
-          leading: '',
-          authorities: '',
-          pPlayer: '',
-          mDirector: '',
-          fHymn: '',
-          fPrayer: '',
-          wAffairs: '',
-          sHymn: '',
-          fSpeaker: '',
-          fTopic: '',
-          sSpeaker: '',
-          sTopic: '',
-          tSpeaker: '',
-          tTopic: '',
-          lHymn: '',
-          lPrayer: ''
+        oldInput:{
+          meetingDay: agenda.meetingDay,
+          presiding: agenda.presiding,
+          leading: agenda.leading,
+          authorities: agenda.authorities,
+          pPlayer: agenda.pPlayer,
+          mDirector: agenda.mDirector,
+          fHymn: agenda.fHymn,
+          fPrayer: agenda.fPrayer,
+          wAffairs: agenda.wAffairs,
+          sHymn: agenda.sHymn,
+          fSpeaker: agenda.fSpeaker,
+          fTopic: agenda.fTopic,
+          sSpeaker: agenda.sSpeaker,
+          sTopic: agenda.sTopic,
+          tSpeaker: agenda.tSpeaker,
+          tTopic: agenda.tTopic,
+          lHymn: agenda.lHymn,
+          lPrayer: agenda.lPrayer
         },
         validationErrors: []
       });
@@ -308,7 +308,6 @@ exports.postEditProduct = (req, res, next) => {
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
       editing: true,
-      errorMessage: errors.array()[0].msg,
       agenda: {
         meetingDay: updatedMeetingDay,
         presiding: updatedPresiding,
@@ -330,7 +329,8 @@ exports.postEditProduct = (req, res, next) => {
         lPrayer: updatedlPrayer,
         meetingKind: updatedmeetingKind,
       },
-      validationErrors: []
+      errorMessage: errors.array()[0].msg,
+      validationErrors: errors.array()
     });
   }
 
@@ -396,14 +396,14 @@ exports.postEditProduct = (req, res, next) => {
 //
 
 exports.postDeleteAgenda = (req, res, next) => {
-  console.log('Im going to terminate this agenda.');
+  console.log('está llegando');
   const agendaId = req.body.agendaId;
   Agenda.deleteOne({
       _id: agendaId
     })
     .then(() => {
-      console.log('Hasta la vista, agenda!');
-      res.redirect('/agendas');
+      console.log('Agenda destroyed!');
+      res.redirect('/agendas'); // TODO: Redirect Somewhere
     })
     .catch(err => {
       const error = new Error(err);
