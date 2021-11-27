@@ -396,14 +396,14 @@ exports.postEditProduct = (req, res, next) => {
 //
 
 exports.postDeleteAgenda = (req, res, next) => {
-  console.log('está llegando');
+  console.log('Im going to terminate this agenda.');
   const agendaId = req.body.agendaId;
   Agenda.deleteOne({
       _id: agendaId
     })
     .then(() => {
-      console.log('Agenda destroyed!');
-      res.redirect('/agendas'); // TODO: Redirect Somewhere
+      console.log('Hasta la vista, agenda!');
+      res.redirect('/agendas');
     })
     .catch(err => {
       const error = new Error(err);

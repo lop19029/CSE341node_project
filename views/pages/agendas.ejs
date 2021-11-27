@@ -31,7 +31,11 @@
                         <a href="/view-agenda/<%= agenda._id %>" title="View Agenda"><i class="fas fa-info"></i></a>
                         <a href="/edit-agenda/<%= agenda._id %>?edit=true" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                         <a href="/agendas/<%= agenda._id %>?sender=true" title="Send Agenda by Email"><i class="far fa-paper-plane"></i></a>
-                        <a href="/delete-agenda/<%= agenda._id %>"><i class="fas fa-trash-alt" title="Delete"></i></a>
+                        <form action="/delete-agenda" method="POST">
+                            <input type="hidden" value="<%= agenda._id %>" name="agendaId">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" title="Delete"><i class="fas fa-trash-alt" title="Delete"></i></button>
+                        </form>
                     </div>
                 </div>
             <% } %>

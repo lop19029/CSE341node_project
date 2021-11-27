@@ -202,7 +202,7 @@ isAuth, agendaController.postEditProduct);
 // Email to clerk (route)
 router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
 
-router.post('/delete-agenda/:agendaId',isAuth, agendaController.postDeleteAgenda)
+router.post('/delete-agenda',isAuth, agendaController.postDeleteAgenda)
 
 //Login
 //router.get('/login', publicController.getLogin);
