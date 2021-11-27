@@ -33,6 +33,8 @@ router.post('/add-agenda',
         min: 1
     }),
 
+   
+
     body('presiding', 'Please Enter who presides the meeting.')
     .isString()
     .isLength({
@@ -48,13 +50,13 @@ router.post('/add-agenda',
     body('authorities', 'Invalid Imput.')
     .isString(),
 
-    body('pPlayer', 'Please Enter the name of the Pianist.')
+    body('pPlayer', 'Please enter the name of the Pianist.')
     .isString(),
 
-    body('mDirector', 'Please Enter the music director.')
+    body('mDirector', 'Please enter the music director.')
     .isString(),
 
-    body('fHymn', 'Please fist hymn.')
+    body('fHymn', 'Please enter the first hymn.')
     .isString()
     .isLength({
         min: 1
@@ -107,6 +109,7 @@ router.post('/add-agenda',
     }),
 
 ],
+
 isAuth, agendaController.postAddAgenda);
 
 //edit agenda
