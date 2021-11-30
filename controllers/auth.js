@@ -13,7 +13,7 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const User = require('../models/user');
 const { validationResult } = require('express-validator');
-
+const buffer = require('buffer');
 // Transporter
 const transporter = nodemailer.createTransport({
     host: "mail.sacredplanner.xyz",
@@ -181,7 +181,7 @@ exports.getSignup = (req, res, next) => {
         },
         validationErrors: []
     });
-  };
+};
 
 //Signup
 exports.postSignup = (req, res, next) => {
@@ -253,7 +253,7 @@ exports.postSignup = (req, res, next) => {
               return next(error);
             });
             req.session.isAdded = false;
-  }
+}
   
 
 //Recover Password
@@ -278,61 +278,114 @@ exports.getReset = (req, res, next) => {
 };
 
 exports.postReset = (req, res, next) => {
-  const {
-    mail
-} = req.body;
-
-const errors = validationResult(req);
-if (!errors.isEmpty()) {
-    return res.status(422).render('template', {
-        pageTitle: 'Reset',
-        PagetoLoad: 'auth/reset',
-        SocialLinks: socialLinks,
-        errorMessage: errors.array()[0].msg,
-        oldInput: {
-            mail: mail
-        },
-        validationErrors: errors.array()
-    });
-}
-//Add function to Reset Password
-
-exports.getReset = (req, res, next) => {
-    let message = req.flash('error');
-    if (message.length > 0) {
-        message = message[0];
-    } else {
-        message = null;
+    const { mail } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).render('template', {
+            pageTitle: 'Reset',
+            PagetoLoad: 'auth/reset',
+            SocialLinks: socialLinks,
+            errorMessage: errors.array()[0].msg,
+            oldInput: {
+                mail: mail
+            },
+            validationErrors: errors.array()
+        });
     }
-    res.render('auth/reset', {
-        pageTitle: 'Reset',
-        PagetoLoad: 'auth/reset',
-        errorMessage: message
-        
-    });
-  };
-
-// Ends
-transporter.sendMail({
-        to: mail, //Please add your personal email where you'll receive the contact form response
-        from: 'contact@sacredplanner.xyz',
-        subject: 'Reset Password | ' + mail,
-        html: `
-    <h1 style='text-align: center;'>Formulario de Contacto</h1>
-    <hr>
-<ul style='line-height: 2em;'>
-<li><strong>Correo:</strong> <a href="mailto:${mail}">${mail}</a></li>
-</ul>
-<hr>
-<p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
-`
-    }).then(function (success) {
-        req.flash('error', 'Please review your Inbox or Spam!');
-        res.redirect('/auth/reset');
-    })
-    .catch(err => {
+    const token = buffer.toString('hex');
+    console.log("token: " + token);
+    User.findOne({ email: req.body.mail })
+      .then(user => {
+        if (!user) {
+          req.flash('error', 'No account with that email found.');
+          return res.redirect('/auth/reset');
+        }
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000;
+        return user.save();
+      })
+      .then(result => {
+        //res.redirect('/');
+        transporter.sendMail({
+          to: req.body.mail,
+          from: 'contact@sacredplanner.xyz',
+          subject: 'Password reset!',
+          html: `
+          <p>You requested a password reset</p>
+          <p>Click this <a href="https://sacredplanner.xyz/auth/reset/${token}">link</a> to set a new password.</p>
+        `
+        }).then(function (success) {
+            req.flash('error', 'Please review your Inbox or Spam!');
+            res.redirect('/auth/reset');
+        }).catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+      })
+      .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
         return next(error);
-    });
-};
+      });
+}
+
+exports.getNewPassword = (req, res, next) => {
+    console.log("dentro de getnewpassword");
+    const errors = validationResult(req);
+    const token = req.params.token;
+    User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+      .then(user => {
+        let message = req.flash('error');
+        if (message.length > 0) {
+          message = message[0];
+        } else {
+          message = null;
+        }
+        res.status(422).render('template', {
+          pageTitle: 'New Password',
+          PagetoLoad: 'auth/new-password',
+          SocialLinks: socialLinks,
+          errorMessage: message,
+          userId: user._id.toString(),
+          passwordToken: token
+        });
+        
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+  };
+  
+  exports.postNewPassword = (req, res, next) => {
+    const newPassword = req.body.password;
+    const userId = req.body.userId;
+    const passwordToken = req.body.passwordToken;
+    let resetUser;
+    
+    User.findOne({
+      resetToken: passwordToken,
+      resetTokenExpiration: { $gt: Date.now() },
+      _id: userId
+    })
+      .then(user => {
+        resetUser = user;
+        return bcrypt.hash(newPassword, 12);
+      })
+      .then(hashedPassword => {
+        resetUser.password = hashedPassword;
+        resetUser.resetToken = undefined;
+        resetUser.resetTokenExpiration = undefined;
+        return resetUser.save();
+      })
+      .then(result => {
+        res.redirect('/auth/login');
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+  };

@@ -86,10 +86,11 @@ body('mail', 'Please enter a valid email address.')
 ],
 authController.postReset);
 
-//router.post('/logout', authController.postLogout);
+router.get('/reset/:token', authController.getNewPassword);
+router.post('/new-password', authController.postNewPassword);
 
 module.exports = router;
 
 /**************** Tiago ********************/
 
-router.get('/reset', authController.getReset);
+//router.get('/reset', authController.getReset);
