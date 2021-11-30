@@ -14,6 +14,7 @@ const nodemailer = require('nodemailer');
 const User = require('../models/user');
 const { validationResult } = require('express-validator');
 const buffer = require('buffer');
+const crypto = require('crypto');
 // Transporter
 const transporter = nodemailer.createTransport({
     host: "mail.sacredplanner.xyz",
@@ -279,6 +280,11 @@ exports.getReset = (req, res, next) => {
 
 exports.postReset = (req, res, next) => {
     const { mail } = req.body;
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+          console.log(err);
+          return res.redirect('/reset');
+        }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).render('template', {
@@ -328,6 +334,7 @@ exports.postReset = (req, res, next) => {
         error.httpStatusCode = 500;
         return next(error);
       });
+    });
 }
 
 exports.getNewPassword = (req, res, next) => {
