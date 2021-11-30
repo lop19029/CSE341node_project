@@ -15,6 +15,7 @@ const User = require('../models/user');
 const { validationResult } = require('express-validator');
 const buffer = require('buffer');
 const crypto = require('crypto');
+global.emailPost = "inicio";
 // Transporter
 const transporter = nodemailer.createTransport({
     host: "mail.sacredplanner.xyz",
@@ -260,6 +261,7 @@ exports.postSignup = (req, res, next) => {
 //Recover Password
 exports.getReset = (req, res, next) => {
   let message = req.flash('error');
+ 
   if (message.length > 0) {
       message = message[0];
   } else {
@@ -280,6 +282,8 @@ exports.getReset = (req, res, next) => {
 
 exports.postReset = (req, res, next) => {
     const { mail } = req.body;
+    emailPost = req.body.mail;
+    
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
           console.log(err);
@@ -299,7 +303,7 @@ exports.postReset = (req, res, next) => {
         });
     }
     const token = buffer.toString('hex');
-    console.log("token: " + token);
+    //console.log("token: " + token);
     User.findOne({ email: req.body.mail })
       .then(user => {
         if (!user) {
@@ -335,13 +339,16 @@ exports.postReset = (req, res, next) => {
         return next(error);
       });
     });
-}
 
+}
 exports.getNewPassword = (req, res, next) => {
     console.log("dentro de getnewpassword");
     const errors = validationResult(req);
     const token = req.params.token;
-    User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+    
+    
+
+    User.findOne({ email: emailPost, resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
       .then(user => {
         let message = req.flash('error');
         if (message.length > 0) {
@@ -365,11 +372,17 @@ exports.getNewPassword = (req, res, next) => {
         return next(error);
       });
   };
-  
+ 
   exports.postNewPassword = (req, res, next) => {
     const newPassword = req.body.password;
     const userId = req.body.userId;
+    
+    
     const passwordToken = req.body.passwordToken;
+    console.log("newPassword: " + newPassword);
+    console.log("userIdk: " + userId);
+    console.log("passwordToken: " + passwordToken);
+
     let resetUser;
     
     User.findOne({
@@ -378,10 +391,12 @@ exports.getNewPassword = (req, res, next) => {
       _id: userId
     })
       .then(user => {
+         
         resetUser = user;
         return bcrypt.hash(newPassword, 12);
       })
       .then(hashedPassword => {
+        console.log("dentro de hashedpass");  
         resetUser.password = hashedPassword;
         resetUser.resetToken = undefined;
         resetUser.resetTokenExpiration = undefined;

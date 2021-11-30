@@ -75,6 +75,8 @@ app.use(
           req.user = user;
           res.locals.name = user.uName;
           res.locals.mail = user.email;
+          res.locals.idUser = user._id;
+          //console.log("user._id: " + user._id);
           next();
         })
         .catch(err => {
