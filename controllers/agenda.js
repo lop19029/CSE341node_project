@@ -10,7 +10,7 @@ const socialLinks = {
   Copyright: "https://Sites.MarBust.com"
 }
 
-// Imports   
+// Imports    
 const mongoose = require('mongoose');
 const {
   validationResult
@@ -45,6 +45,7 @@ exports.getAddAgenda = (req, res, next) => {
       SocialLinks: socialLinks,
       errorMessage: message,
       editing: false,
+      hasError: false,
       oldInput:{
         meetingDay: '',
         presiding: '',
@@ -102,6 +103,7 @@ exports.postAddAgenda = (req, res, next) => {
           PagetoLoad: 'agenda-form',
           SocialLinks: socialLinks,
           editing: false,
+          hasError: true,
           errorMessage: errors.array()[0].msg,
           oldInput: {
             meetingDay: meetingDay,
@@ -247,25 +249,26 @@ exports.getEditAgenda = (req, res, next) => {
         errorMessage: message,
         agenda: agenda,
         editing: true,
+        hasError: false,
         oldInput:{
-          meetingDay: agenda.meetingDay,
-          presiding: agenda.presiding,
-          leading: agenda.leading,
-          authorities: agenda.authorities,
-          pPlayer: agenda.pPlayer,
-          mDirector: agenda.mDirector,
-          fHymn: agenda.fHymn,
-          fPrayer: agenda.fPrayer,
-          wAffairs: agenda.wAffairs,
-          sHymn: agenda.sHymn,
-          fSpeaker: agenda.fSpeaker,
-          fTopic: agenda.fTopic,
-          sSpeaker: agenda.sSpeaker,
-          sTopic: agenda.sTopic,
-          tSpeaker: agenda.tSpeaker,
-          tTopic: agenda.tTopic,
-          lHymn: agenda.lHymn,
-          lPrayer: agenda.lPrayer
+          meetingDay: "agenda.meetingDay",
+          presiding: "agenda.presiding",
+          leading: "agenda.leading",
+          authorities: "agenda.authorities",
+          pPlayer: "agenda.pPlayer",
+          mDirector: "agenda.mDirector",
+          fHymn: "agenda.fHymn",
+          fPrayer: "agenda.fPrayer",
+          wAffairs: "agenda.wAffair",
+          sHymn: "agenda.sHymn",
+          fSpeaker: "agenda.fSpeaker",
+          fTopic: "agenda.fTopic",
+          sSpeaker:" agenda.sSpeaker",
+          sTopic: "agenda.sTopic",
+          tSpeaker: "agenda.tSpeaker",
+          tTopic: "agenda.tTopic",
+          lHymn: "agenda.lHymn",
+          lPrayer: "agenda.lPrayer"
         },
         validationErrors: []
       });
