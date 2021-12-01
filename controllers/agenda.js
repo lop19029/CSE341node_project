@@ -415,49 +415,86 @@ exports.getEmailtoClerk = (req, res, next) => {
     .then(agenda => {   
       
       console.log(agenda);
+
+      let htmlBodyContent = "";
+      if (agenda.meetingKind == 'isNormal') {
+        htmlBodyContent = `
+        <h1 style='text-align: center;'>Sacrament Meeting Agenda</h1>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Date: </strong>${agenda.meetingDay}</li>
+          <li><strong>Presiding: </strong>${agenda.presiding}</li>
+          <li><strong>Leading: </strong>${agenda.leading}</li>
+        </ul>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Music: </strong>${agenda.pPlayer}</li>
+          <li><strong>Music Director: </strong>${agenda.mDirector}</li>
+          <li><strong>First Hymn: </strong>${agenda.fHymn}</li>
+          <li><strong>First Prayer: </strong>${agenda.fPrayer}</li>
+        </ul>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Authorities Acknowledgment: </strong>${agenda.authorities}</li>
+          <li><strong>Ward Affairs: </strong>${agenda.wAffairs}</li>
+          <li><strong>Sacrament Hymn: </strong>${agenda.sHymn}</li>
+        </ul>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>First Speaker: </strong>${agenda.fSpeaker}</li>
+          <li><strong>Topic: </strong>${agenda.fTopic}</li>
+          <li><strong>Second Speaker: </strong>${agenda.sSpeaker}</li>
+          <li><strong>Topic: </strong>${agenda.sTopic}</li>
+          <li><strong>Third Speaker: </strong>${agenda.tSpeaker}</li>
+          <li><strong>Topic: </strong>${agenda.tTopic}</li>
+        </ul>
+        <hr> 
+      
+        <ul style='line-height: 2em;'>
+          <li><strong>Last Hymn: </strong>${agenda.lHymn}</li>
+          <li><strong>Ward Last Prayer: </strong>${agenda.lPrayer}</li>
+        </ul>
+        <p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
+      `;
+      } else {
+        htmlBodyContent = `
+        <h1 style='text-align: center;'>Fast Sacrament Meeting Agenda</h1>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Date: </strong>${agenda.meetingDay}</li>
+          <li><strong>Presiding: </strong>${agenda.presiding}</li>
+          <li><strong>Leading: </strong>${agenda.leading}</li>
+        </ul>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Music: </strong>${agenda.pPlayer}</li>
+          <li><strong>Music Director: </strong>${agenda.mDirector}</li>
+          <li><strong>First Hymn: </strong>${agenda.fHymn}</li>
+          <li><strong>First Prayer: </strong>${agenda.fPrayer}</li>
+        </ul>
+        <hr>
+        <ul style='line-height: 2em;'>
+          <li><strong>Authorities Acknowledgment: </strong>${agenda.authorities}</li>
+          <li><strong>Ward Affairs: </strong>${agenda.wAffairs}</li>
+          <li><strong>Sacrament Hymn: </strong>${agenda.sHymn}</li>
+        </ul>
+        <hr>
+        <p><strong>Now it's time for the Fast Meeting Testimonies, please invite to the members</strong></p>
+        <hr> 
+      
+        <ul style='line-height: 2em;'>
+          <li><strong>Last Hymn: </strong>${agenda.lHymn}</li>
+          <li><strong>Ward Last Prayer: </strong>${agenda.lPrayer}</li>
+        </ul>
+        <p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
+      `;
+      }
       
       transporter.sendMail({
         to: res.locals.mail, //Please add your personal email where you'll receive the contact form response
         from: 'contact@sacredplanner.xyz',
-        subject: 'The Sacred Planner - Agenda',
-        html: `
-                <h1 style='text-align: center;'>The Agenda is ready</h1>
-                <hr>
-                <ul style='line-height: 2em;'>
-                  <li><strong>Date: </strong>${agenda.meetingDay}</li>
-                  <li><strong>Presiding: </strong>${agenda.presiding}</li>
-                  <li><strong>Leading: </strong>${agenda.leading}</li>
-                </ul>
-                <hr>
-                <ul style='line-height: 2em;'>
-                  <li><strong>Music: </strong>${agenda.pPlayer}</li>
-                  <li><strong>Music Director: </strong>${agenda.mDirector}</li>
-                  <li><strong>First Hymn: </strong>${agenda.fHymn}</li>
-                  <li><strong>First Prayer: </strong>${agenda.fPrayer}</li>
-                </ul>
-                <hr>
-                <ul style='line-height: 2em;'>
-                  <li><strong>Authorities Acknowledgment: </strong>${agenda.authorities}</li>
-                  <li><strong>Ward Affairs: </strong>${agenda.wAffairs}</li>
-                  <li><strong>Sacrament Hymn: </strong>${agenda.sHymn}</li>
-                </ul>
-                <hr>
-                <ul style='line-height: 2em;'>
-                  <li><strong>First Speaker: </strong>${agenda.fSpeaker}</li>
-                  <li><strong>Topic: </strong>${agenda.fTopic}</li>
-                  <li><strong>Second Speaker: </strong>${agenda.sSpeaker}</li>
-                  <li><strong>Topic: </strong>${agenda.sTopic}</li>
-                  <li><strong>Third Speaker: </strong>${agenda.tSpeaker}</li>
-                  <li><strong>Topic: </strong>${agenda.tTopic}</li>
-                </ul>
-                <hr> 
-              
-                <ul style='line-height: 2em;'>
-                  <li><strong>Last Hymn: </strong>${agenda.lHymn}</li>
-                  <li><strong>Ward Last Prayer: </strong>${agenda.lPrayer}</li>
-                </ul>
-                <p style='text-align: center;'><strong>The Sacred Planner Team&reg;</strong></p>
-              `
+        subject: 'Sacrament Meeting Agenda | ' + agenda.meetingDay + ' | The Sacred Planner',
+        html: htmlBodyContent
       }).then(function (success) {
           req.flash('error', 'Mensaje Enviado Correctamente!');
           res.redirect('/');

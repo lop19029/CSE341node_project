@@ -25,12 +25,16 @@
             <h2>Sacrament Time</h2>
             <hr>
             <p><strong>Sacrament Hymn:</strong> <%=agenda.sHymn%></p>
+            <% if(agenda.meetingKind == 'isNormal') { %>
             <p><strong>First Talk Speaker:</strong> <%=agenda.fSpeaker%></p>
             <p><strong>First Talk Topic:</strong> <%=agenda.fTopic%></p>
             <p><strong>Second Talk Speaker:</strong> <%=agenda.sSpeaker%></p>
             <p><strong>Second Talk Topic:</strong> <%=agenda.sTopic%></p>
             <p><strong>Third Talk Speaker:</strong> <%=agenda.tSpeaker%></p>
             <p><strong>Third Talk Topic:</strong> <%=agenda.tTopic%></p>
+            <% } else { %>
+            <p><strong>Now it's time for the Fast Meeting Testimonies, please invite to the members</strong></p>
+            <% } %>
             <hr>
             <p><strong>Last Hymn:</strong> <%=agenda.lHymn%></p>
             <p><strong>Last Prayer:</strong> <%=agenda.lPrayer%></p>
