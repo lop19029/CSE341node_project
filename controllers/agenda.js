@@ -18,15 +18,8 @@ const {
 const Agenda = require('../models/agenda');
 const nodemailer = require('nodemailer');
 // Transporter
-const transporter = nodemailer.createTransport({
-  host: "mail.sacredplanner.xyz",
-  port: 465,
-  secure: true,
-  auth: {
-      user: "nodemailer@sacredplanner.xyz", // generated ethereal user
-      pass: "mTtBAXRdEf" // generated ethereal password
-  }
-});
+const mailerSettings = require('./node-mailer-settings');
+const transporter = mailerSettings.transporter;
 //
 //CREATE
 //

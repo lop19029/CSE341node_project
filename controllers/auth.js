@@ -17,15 +17,8 @@ const buffer = require('buffer');
 const crypto = require('crypto');
 global.emailPost = "inicio";
 // Transporter
-const transporter = nodemailer.createTransport({
-    host: "mail.sacredplanner.xyz",
-    port: 465,
-    secure: true,
-    auth: {
-        user: "nodemailer@sacredplanner.xyz", // generated ethereal user
-        pass: "mTtBAXRdEf" // generated ethereal password
-    }
-});
+const mailerSettings = require('./node-mailer-settings');
+const transporter = mailerSettings.transporter;
 
 //Login
 exports.getLogin = (req, res, next) => {
