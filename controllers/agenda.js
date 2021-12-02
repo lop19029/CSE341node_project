@@ -7,7 +7,7 @@ const socialLinks = {
   Instagram: "https://www.instagram.com/",
   Youtube: "https://www.youtube.com/",
   Email: "mailto:@",
-  Copyright: "https://Sites.MarBust.com"
+  Copyright: "https://sacredplanner.xyz/"
 }
 
 // Imports   
