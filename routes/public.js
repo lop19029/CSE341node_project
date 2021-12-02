@@ -17,7 +17,7 @@ const isAuth = require('../middleware/is-auth');
 //Home
 router.get('/', publicController.getIndex);
 // render agenda page
-router.get('/agendas', isAuth, agendaController.getAgendas);
+router.get('/agendas',isAuth, agendaController.getAgendas);
 //Display agenda by id
 router.get('/view-agenda/:agendaId', isAuth, agendaController.getAgenda);
 
