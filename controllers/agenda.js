@@ -17,6 +17,7 @@ const {
 } = require('express-validator');
 const Agenda = require('../models/agenda');
 const nodemailer = require('nodemailer');
+const User = require('../models/user');
 // Transporter
 const mailerSettings = require('./node-mailer-settings');
 const transporter = mailerSettings.transporter;
@@ -171,7 +172,8 @@ exports.getAgendas = (req, res, next) => {
               pageTitle: 'Agendas',
               PagetoLoad: 'agendas',
               SocialLinks: socialLinks,
-              agendas: agendas
+              agendas: agendas,
+              role: req.user.role
           });
         
     })
