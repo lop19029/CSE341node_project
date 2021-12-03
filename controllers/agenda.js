@@ -32,6 +32,14 @@ exports.getAddAgenda = (req, res, next) => {
     message = message[0];
   } else {
     message = null;
+
+  // Validation by role ( Only addmind Can Add to the Create agenda view)
+  const role = req.user.role;
+  console.log( role);
+  if(role !== "admin"){
+   return res.redirect('/agendas');
+  }
+
   }
   res.render('template', {
     pageTitle: 'Add Agenda',
@@ -194,6 +202,7 @@ exports.getAgenda = (req, res, next) => {
   } else {
     message = null;
   }
+  
   const agendaId = req.params.agendaId;
   Agenda.findById(agendaId)
     .then(agenda => {
