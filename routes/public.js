@@ -117,8 +117,12 @@ isAuth, agendaController.postAddAgenda);
 //edit agenda
 router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
 router.post('/edit-agenda', isAuth, agendaController.postEditProduct);
+
 // Email to clerk (route)
 router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
+
+// Delete agenda
+router.post('/delete-agenda',isAuth, agendaController.postDeleteAgenda)
 
 //Login
 //router.get('/login', publicController.getLogin);

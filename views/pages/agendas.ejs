@@ -32,7 +32,11 @@
                         <a href="/view-agenda/<%= agenda._id %>" title="View Agenda"><i class="fas fa-info"></i></a>
                         <a href="/edit-agenda/<%= agenda._id %>?edit=true" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                         <a href="/agendas/<%= agenda._id %>?sender=true" title="Send Agenda by Email"><i class="far fa-paper-plane"></i></a>
-                        <a href="#" <% if ( role !== "admin") { %> style="display: none" <% } %>  ><i class="fas fa-trash-alt" title="Delete"></i></a>
+                        <form action="/delete-agenda" method="POST" <% if ( role !== "admin") { %> style="display: none" <% } %>>
+                            <input type="hidden" value="<%= agenda._id %>" name="agendaId">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" title="Delete"><i class="fas fa-trash-alt" title="Delete"></i></button>
+                        </form>
                     </div>
                 </div>
             <% } %>
@@ -41,4 +45,4 @@
     <p>No agendas yet? Create your first one!</p> <!-- TODO: Improve this message presentation-->
     <% } %>
     
-<a href="/add-agenda" class="add-agenda-btn" title="Create Agenda" <% if ( role !== "admin") { %> style="display: none" <% } %> ><i class="fas fa-plus"></i></a>
+<a href="/add-agenda" class="add-agenda-btn" title="Create Agenda"><i class="fas fa-plus"></i></a>

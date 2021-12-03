@@ -33,13 +33,6 @@ exports.getAddAgenda = (req, res, next) => {
   } else {
     message = null;
 
-  // Validation by role ( Only addmind Can Add to the Create agenda view)
-  const role = req.user.role;
-  console.log( role);
-  if(role !== "admin"){
-   return res.redirect('/agendas');
-  }
-
   }
   res.render('template', {
     pageTitle: 'Add Agenda',
@@ -381,16 +374,22 @@ exports.postEditProduct = (req, res, next) => {
 
 //
 // DELETE
-//
+ exports.postDeleteAgenda = (req, res, next) => {
+  console.log('está llegando');
 
-exports.postDeleteAgenda = (req, res, next) => {
-  const agendaId = req.body.productId;
+   // Validation by role ( Only addmind Can Add to the Create agenda view)
+ const role = req.user.role;
+ console.log( role);
+ if(role !== "admin"){
+  return res.redirect('/agendas');
+ }
+  const agendaId = req.body.agendaId;
   Agenda.deleteOne({
       _id: agendaId
     })
     .then(() => {
       console.log('Agenda destroyed!');
-      res.redirect('#'); // TODO: Redirect Somewhere
+      res.redirect('/agendas'); // TODO: Redirect Somewhere
     })
     .catch(err => {
       const error = new Error(err);
