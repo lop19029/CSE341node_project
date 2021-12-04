@@ -36,6 +36,7 @@ exports.getAddAgenda = (req, res, next) => {
   }
   res.render('template', {
     pageTitle: 'Add Agenda',
+    role: req.user.role,
     PagetoLoad: 'agenda-form',
     SocialLinks: socialLinks,
     errorMessage: message,
@@ -96,6 +97,7 @@ exports.postAddAgenda = (req, res, next) => {
     console.log(errors.array());
     return res.status(422).render('template', {
       pageTitle: 'Add Agenda',
+      role: req.user.role,
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
       editing: false,
@@ -202,6 +204,7 @@ exports.getAgenda = (req, res, next) => {
       console.log(agenda);
       res.render('template', {
         pageTitle: 'View Agenda',
+        role: req.user.role,
         PagetoLoad: "view-agenda", //TODO: Include a page to display agendas
         SocialLinks: socialLinks,
         agenda: agenda
@@ -242,6 +245,7 @@ exports.getEditAgenda = (req, res, next) => {
       console.log(agenda);
       res.render('template', {
         pageTitle: 'Edit Agenda',
+        role: req.user.role,
         PagetoLoad: 'agenda-form',
         SocialLinks: socialLinks,
         errorMessage: message,
@@ -289,10 +293,13 @@ exports.postEditProduct = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(422).render('template', {
       pageTitle: 'Add Agenda',
+      role: req.user.role,
       PagetoLoad: 'agenda-form',
       SocialLinks: socialLinks,
       errorMessage: errors.array()[0].msg,
+      editing: true,
       agenda: {
+        _id: agendaId,
         meetingDay: updatedMeetingDay,
         presiding: updatedPresiding,
         leading: updatedLeading,
@@ -311,6 +318,26 @@ exports.postEditProduct = (req, res, next) => {
         tTopic: updatedtTopic,
         lHymn: updatedlHymn,
         lPrayer: updatedlPrayer
+      },
+      oldInput: {
+        meetingDay: '',
+        presiding: '',
+        leading: '',
+        authorities: '',
+        pPlayer: '',
+        mDirector: '',
+        fHymn: '',
+        fPrayer: '',
+        wAffairs: '',
+        sHymn: '',
+        fSpeaker: '',
+        fTopic: '',
+        sSpeaker: '',
+        sTopic: '',
+        tSpeaker: '',
+        tTopic: '',
+        lHymn: '',
+        lPrayer: ''
       },
       validationErrors: []
     });
@@ -352,6 +379,7 @@ exports.postEditProduct = (req, res, next) => {
           .then(agendas => {
              res.render('template', {
                     pageTitle: 'Agendas',
+                    role: req.user.role,
                     PagetoLoad: 'agendas',
                     SocialLinks: socialLinks,
                     agendas: agendas
@@ -511,6 +539,7 @@ exports.getEmailtoClerk = (req, res, next) => {
       .then(agendas => {
          res.render('template', {
                 pageTitle: 'Agendas',
+                role: req.user.role,
                 PagetoLoad: 'agendas',
                 SocialLinks: socialLinks,
                 agendas: agendas

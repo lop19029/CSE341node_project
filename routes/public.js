@@ -116,7 +116,20 @@ isAuth, agendaController.postAddAgenda);
 
 //edit agenda
 router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
-router.post('/edit-agenda', isAuth, agendaController.postEditProduct);
+router.post('/edit-agenda', 
+[
+    body('meetingDay', 'Please Enter the date of the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    }),
+    
+    body('presiding', 'Please Enter who presides the meeting.')
+    .isString()
+    .isLength({
+        min: 1
+    })
+], isAuth, agendaController.postEditProduct);
 
 // Email to clerk (route)
 router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
