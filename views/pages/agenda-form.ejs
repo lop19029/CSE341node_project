@@ -8,7 +8,7 @@
         <form action="/<% if (editing) {%>edit-agenda<% } else { %>add-agenda<% } %>" method="POST">
             <p>Date:</p>
             <input class="<%= validationErrors.find(e => e.param === 'meetingDay') ?  'invalid' : '' %>" type="date" 
-            name="meetingDay" required value="<% if (oldInput.meetingDay !== '') { %><%=oldInput.meetingDay %><% } else if (editing) { %><%=agenda.meetingDay%><% } %>">
+            name="meetingDay" required value="<% if (oldInput.meetingDay !== '') { %><%=oldInput.meetingDay %><% } else if (editing) { %><%=agenda.meetingDay%><% } %>"> <!-- TODO: Implement this same logic in the whole code.-->
             <p>Presiding Authority:</p>
             <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is presiding the meeting?" name="presiding" 

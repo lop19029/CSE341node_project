@@ -205,7 +205,7 @@ exports.getAgenda = (req, res, next) => {
       res.render('template', {
         pageTitle: 'View Agenda',
         role: req.user.role,
-        PagetoLoad: "view-agenda", //TODO: Include a page to display agendas
+        PagetoLoad: "view-agenda",
         SocialLinks: socialLinks,
         agenda: agenda
       });
@@ -345,12 +345,6 @@ exports.postEditProduct = (req, res, next) => {
 
   Agenda.findById(agendaId)
     .then(agenda => {
-      //
-      // TODO: If needed, Check if the user trying to edit is the one who created the agenda  or has the role to that
-      //
-      // if(agenda.userId.toString() !== req.user._id.toString()) {
-      //   return res.redirect('/');
-      // }
       agenda.meetingDay = updatedMeetingDay,
         agenda.presiding = updatedPresiding,
         agenda.leading = updatedLeading,
@@ -417,7 +411,7 @@ exports.postEditProduct = (req, res, next) => {
     })
     .then(() => {
       console.log('Agenda destroyed!');
-      res.redirect('/agendas'); // TODO: Redirect Somewhere
+      res.redirect('/agendas');
     })
     .catch(err => {
       const error = new Error(err);
