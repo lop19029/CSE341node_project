@@ -252,9 +252,24 @@ exports.getEditAgenda = (req, res, next) => {
         agenda: agenda,
         editing: true,
         oldInput: {
+          meetingDay: '',
           presiding: '',
           leading: '',
-          meetingDay: ''
+          authorities: '',
+          pPlayer: '',
+          mDirector: '',
+          fHymn: '',
+          fPrayer: '',
+          wAffairs: '',
+          sHymn: '',
+          fSpeaker: '',
+          fTopic: '',
+          sSpeaker: '',
+          sTopic: '',
+          tSpeaker: '',
+          tTopic: '',
+          lHymn: '',
+          lPrayer: ''
         },
         validationErrors: []
       });

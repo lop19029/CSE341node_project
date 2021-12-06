@@ -45,14 +45,20 @@ body('leading', 'Please Enter who leads the meeting.')
     min: 1
 }),
 
-body('authorities', 'Invalid Imput.')
+body('authorities', 'Invalid Input.')
 .isString(),
 
 body('pPlayer', 'Please Enter the name of the Pianist.')
-.isString(),
+.isString()
+.isLength({
+    min: 1
+}),
 
 body('mDirector', 'Please Enter the music director.')
-.isString(),
+.isString()
+.isLength({
+    min: 1
+}),
 
 body('fHymn', 'Please fist hymn.')
 .isString()
@@ -119,17 +125,93 @@ router.get('/edit-agenda/:agendaId', isAuth, agendaController.getEditAgenda);
 router.post('/edit-agenda', 
 [
     body('meetingDay', 'Please Enter the date of the meeting.')
-    .isString()
-    .isLength({
-        min: 1
-    }),
-    
-    body('presiding', 'Please Enter who presides the meeting.')
-    .isString()
-    .isLength({
-        min: 1
-    })
-    // TODO: Finish validation
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('presiding', 'Please Enter who presides the meeting.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('leading', 'Please Enter who leads the meeting.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('authorities', 'Invalid Imput.')
+.isString(),
+
+body('pPlayer', 'Please Enter the name of the Pianist.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('mDirector', 'Please Enter the music director.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('fHymn', 'Please fist hymn.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('fPrayer', 'Please enter opening prayer/convocation.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('wAffairs', 'Invalid Input')
+.isString(),
+
+body('sHymn', 'Please Enter the second hymn.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('fSpeaker', 'Imput')
+.isString(),
+
+body('fTopic', 'Invalid Imput.')
+.isString(),
+
+body('sSpeaker', 'Invalid Imput.')
+.isString(),
+
+body('sTopic', 'Invalid Imput.')
+.isString(),
+
+body('tSpeaker', 'Invalid Imput.')
+.isString(),
+
+body('tTopic', 'Invalid Imput.')
+.isString(),
+
+
+body('lHymn', 'Please Enter last Hymn.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+body('lPrayer', 'Please Enter closing Prayer.')
+.isString()
+.isLength({
+    min: 1
+}),
+
+
+body('meetingKind',)
+.isString(),
     
 ], isAuth, agendaController.postEditProduct);
 

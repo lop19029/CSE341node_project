@@ -7,36 +7,51 @@
         <% } %>
         <form action="/<% if (editing) {%>edit-agenda<% } else { %>add-agenda<% } %>" method="POST">
             <p>Date:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'meetingDay') ?  'invalid' : '' %>" type="date" 
-            name="meetingDay" required value="<% if (oldInput.meetingDay !== '') { %><%=oldInput.meetingDay %><% } else if (editing) { %><%=agenda.meetingDay%><% } %>"> <!-- TODO: Implement this same logic in the whole code.-->
+                <input 
+                class="<%= validationErrors.find(e => e.param === 'meetingDay') ?  'invalid' : '' %>" 
+                type="date" 
+                name="meetingDay" required 
+                value="<% if (oldInput.meetingDay !== '') { %><%=oldInput.meetingDay %><% } else if (editing) { %><%=agenda.meetingDay%><% } %>">
             <p>Presiding Authority:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
+            <input 
+                class="<%= validationErrors.find(e => e.param === 'presiding') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is presiding the meeting?" name="presiding" 
-                value="<% if (editing) { %><%=agenda.presiding%><% } %>" value="<%= oldInput.presiding %>">  
+                value="<% if (oldInput.presiding !== '') { %><%=oldInput.presiding %><% } else if (editing) { %><%=agenda.presiding%><% } %>">   
             <p>Leading Authority:</p>
-            <input class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text"
+            <input 
+                class="<%= validationErrors.find(e => e.param === 'leading') ?  'invalid' : '' %>" type="text"
                 required placeholder="Who is leading the meeting?" name="leading"
-                value="<% if (editing) { %><%=agenda.leading%><% } %>" value="<%= oldInput.leading %>">
+                value="<% if (oldInput.leading !== '') { %><%=oldInput.leading %><% } else if (editing) { %><%=agenda.leading%><% } %>">   
             <hr>
             <p>Authorities Acknowledgment:</p>
-            <textarea name="authorities" placeholder="Authorities Acknowledgment"><% if (editing) { %><%=agenda.authorities%><% } %></textarea>
+            <textarea name="authorities" placeholder="Authorities Acknowledgment"><% if (oldInput.authorities !== '') { %><%=oldInput.authorities %><% } else if (editing) { %><%=agenda.authorities%><% } %></textarea>
             <p>Piano Player:</p>
-            <input name="pPlayer" type="text" placeholder="Who is playing the piano?" value="<% if (editing) { %><%=agenda.pPlayer%><% } %>" value="<%= oldInput.pPlayer %>">
+            <input 
+                name="pPlayer" type="text" placeholder="Who is playing the piano?" 
+                value="<% if (oldInput.pPlayer !== '') { %><%=oldInput.pPlayer %><% } else if (editing) { %><%=agenda.pPlayer%><% } %>">   
             <p>Music Director:</p>
-            <input name="mDirector" type="text" placeholder="Who is directing the music?" value="<% if (editing) { %><%=agenda.mDirector%><% } %>" value="<%= oldInput.mDirector %>">
+            <input 
+                name="mDirector" type="text" placeholder="Who is directing the music?" 
+                value="<% if (oldInput.mDirector !== '') { %><%=oldInput.mDirector %><% } else if (editing) { %><%=agenda.mDirector%><% } %>">   
             <p>First Hymn:</p>
-            <input name="fHymn" type="text" placeholder="What is the first hymn?" value="<% if (editing) { %><%=agenda.fHymn%><% } %>" value="<%= oldInput.fHymn %>">
+            <input 
+                name="fHymn" type="text" placeholder="What is the first hymn?" 
+                value="<% if (oldInput.fHymn !== '') { %><%=oldInput.fHymn %><% } else if (editing) { %><%=agenda.fHymn%><% } %>">   
             <p>First Prayer:</p>
-            <input name="fPrayer" type="text" placeholder="What is the first prayer?" value="<% if (editing) { %><%=agenda.fPrayer%><% } %>" value="<%= oldInput.fPrayer %>">
+            <input 
+                name="fPrayer" type="text" placeholder="What is the first prayer?" 
+                value="<% if (oldInput.fPrayer !== '') { %><%=oldInput.fPrayer %><% } else if (editing) { %><%=agenda.fPrayer%><% } %>">   
             <hr>
             <p>Ward Affairs:</p>
-            <textarea name="wAffairs" placeholder="What are the Ward Affairs?"><% if (editing) { %><%=agenda.wAffairs%><% } %></textarea>
+            <textarea name="wAffairs" placeholder="What are the Ward Affairs?"><% if (oldInput.wAffairs !== '') { %><%=oldInput.wAffairs %><% } else if (editing) { %><%=agenda.wAffairs%><% } %></textarea>
             <p>Stake Affairs</p>
             <hr>
             <h2>Sacrament Time</h2>
             <br>
             <p>Sacrament Hymn:</p>
-            <input name="sHymn" type="text" placeholder="What is the sacrament hymn?" value="<% if (editing) { %><%=agenda.sHymn%><% } %>">
+            <input 
+                name="sHymn" type="text" placeholder="What is the sacrament hymn?" 
+                value="<% if (oldInput.sHymn !== '') { %><%=oldInput.sHymn %><% } else if (editing) { %><%=agenda.sHymn%><% } %>"> 
             <% if (!editing) { %>
             <hr>
             <h2>Select if it's a Normal or a Fast Meeting</h2>
@@ -48,36 +63,44 @@
             <hr>
             <div id="isNormalMeeting">
                 <p>First Talk Speaker:</p>
-                <input name="fSpeaker" type="text" placeholder="Who is the First Talk Speaker?" 
-                value="<% if (editing) { %><%=agenda.fSpeaker%><% } %>">
+                <input 
+                    name="fSpeaker" type="text" placeholder="Who is the First Talk Speaker?" 
+                    value="<% if (oldInput.fSpeaker !== '') { %><%=oldInput.fSpeaker %><% } else if (editing) { %><%=agenda.fSpeaker%><% } %>">   
                 <p>First Talk Topic:</p>
-                <input name="fTopic" type="text" placeholder="Who is the First Talk Topic?" 
-                value="<% if (editing) { %><%=agenda.fTopic%><% } %>">
+                <input 
+                    name="fTopic" type="text" placeholder="Who is the First Talk Topic?" 
+                    value="<% if (oldInput.fTopic !== '') { %><%=oldInput.fTopic %><% } else if (editing) { %><%=agenda.fTopic%><% } %>">   
                 <br>
                 <br>
                 <p>Second Talk Speaker:</p>
-                <input name="sSpeaker" type="text" placeholder="Who is the Second Talk Speaker?" 
-                value="<% if (editing) { %><%=agenda.sSpeaker%><% } %>">
+                <input 
+                    name="sSpeaker" type="text" placeholder="Who is the Second Talk Speaker?" 
+                    value="<% if (oldInput.sSpeaker !== '') { %><%=oldInput.sSpeaker %><% } else if (editing) { %><%=agenda.sSpeaker%><% } %>">   
                 <p>Second Talk Topic:</p>
-                <input name="sTopic" type="text" placeholder="Who is the Second Talk Topic?" 
-                value="<% if (editing) { %><%=agenda.sTopic%><% } %>">
+                <input 
+                    name="sTopic" type="text" placeholder="Who is the Second Talk Topic?" 
+                    value="<% if (oldInput.sTopic !== '') { %><%=oldInput.sTopic %><% } else if (editing) { %><%=agenda.sTopic%><% } %>">   
                 <br>
                 <br>
                 <p>Third Talk Speaker:</p>
-                <input name="tSpeaker" type="text" placeholder="Who is the Third Talk Speaker?" 
-                value="<% if (editing) { %><%=agenda.tSpeaker%><% } %>">
+                <input 
+                    name="tSpeaker" type="text" placeholder="Who is the Third Talk Speaker?" 
+                    value="<% if (oldInput.tSpeaker !== '') { %><%=oldInput.tSpeaker %><% } else if (editing) { %><%=agenda.tSpeaker%><% } %>">   
                 <p>Third Talk Topic:</p>
-                <input name="tTopic" type="text" placeholder="Who is the Third Talk Topic?" 
-                value="<% if (editing) { %><%=agenda.tTopic%><% } %>">
+                <input 
+                    name="tTopic" type="text" placeholder="Who is the Third Talk Topic?" 
+                    value="<% if (oldInput.tTopic !== '') { %><%=oldInput.tTopic %><% } else if (editing) { %><%=agenda.tTopic%><% } %>">   
                 <hr>
             </div>
             <div id="finalAgendaOptions" <% if (editing) { %> style="display: block" <% } %>> 
                 <p>Last Hymn:</p>
-                <input name="lHymn" type="text" placeholder="What is the last hymn?" 
-                value="<% if (editing) { %><%=agenda.lHymn%><% } %>">
+                <input 
+                    name="lHymn" type="text" placeholder="What is the last hymn?" 
+                    value="<% if (oldInput.lHymn !== '') { %><%=oldInput.lHymn %><% } else if (editing) { %><%=agenda.lHymn%><% } %>">   
                 <p>Last Prayer:</p>
-                <input name="lPrayer" type="text" placeholder="What is the Last prayer?" 
-                value="<% if (editing) { %><%=agenda.lPrayer%><% } %>">
+                <input 
+                    name="lPrayer" type="text" placeholder="What is the Last prayer?" 
+                    value="<% if (oldInput.lPrayer !== '') { %><%=oldInput.lPrayer %><% } else if (editing) { %><%=agenda.lPrayer%><% } %>">   
             </div>
             <button type="submit" id="btn-agenda"><% if (editing) {%>Update Agenda<% } else { %>Create Agenda<% } %></button>
             <% if (editing) { %>
