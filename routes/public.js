@@ -219,7 +219,7 @@ body('meetingKind',)
 router.get('/agendas/:agendaId' ,isAuth, agendaController.getEmailtoClerk);
 
 // Delete agenda
-router.post('/delete-agenda',isAuth, agendaController.postDeleteAgenda)
+router.use('/delete-agenda/:agendaId',isAuth, agendaController.getDeleteAgenda)
 
 //Contact
 router.get('/contact', publicController.getContact);

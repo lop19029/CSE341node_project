@@ -411,16 +411,15 @@ exports.postEditProduct = (req, res, next) => {
 
 //
 // DELETE
- exports.postDeleteAgenda = (req, res, next) => {
-  console.log('está llegando');
-
+ exports.getDeleteAgenda = (req, res, next) => {
+  console.log("Ready to delete agenda.")
    // Validation by role ( Only addmind Can Add to the Create agenda view)
  const role = req.user.role;
  console.log( role);
  if(role !== "admin"){
   return res.redirect('/agendas');
  }
-  const agendaId = req.body.agendaId;
+  const agendaId = req.params.agendaId;
   Agenda.deleteOne({
       _id: agendaId
     })
