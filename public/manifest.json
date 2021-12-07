@@ -1,9 +1,9 @@
 {
-    "name": "PWA",
-    "short_name": "PWA",
-    "description": "",
+    "name": "Sacred Agenda",
+    "short_name": "Sacred Agenda",
+    "description": "This project helps members of The Church of Jesus Christ of Latter-day Saints to plan a sacrament meeting. In this project o can be planned speakers, hymns and all activities relating to the meetings that normally take place on Sundays.",
     "background_color": "#ffffff",
-    "theme_color": "#388DCE",
+    "theme_color": "#DE7B06",
     "orientation": "portrait",
     "display": "standalone",
     "start_url": "/",
