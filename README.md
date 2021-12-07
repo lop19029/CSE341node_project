@@ -1,6 +1,6 @@
 # The Sacred Planner
 
-<img src="screenshot.png" alt="App screenshot">
+<img src="screnshot.png" alt="App screenshot">
 
 > This app helps leaders of The Church of Jesus Christ of Latter-day Saints to plan a sacrament meeting. Here, they can keep control of the agendas of the meetings that normally take place on Sundays.
 
@@ -49,7 +49,6 @@ Start the server
 
 ```bash
   npm run start
-```
 ```
 
 ## ☕ Using <The_Sacred_Planner>
