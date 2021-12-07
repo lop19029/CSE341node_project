@@ -17,7 +17,8 @@ relating to the meetings that normally take place on Sundays.
 
 
 ## Logo
-<img src="https://raw.githubusercontent.com/lop19029/CSE341node_project/20cd77e40b9d3bcaecdba860faddcb06d59bc50b/public/favicon.png?token=AMMGHSXPEB4TSUCT4R4YISTBV2NHM" width="50%"/>
+![Logo](https://raw.githubusercontent.com/lop19029/CSE341node_project/20cd77e40b9d3bcaecdba860faddcb06d59bc50b/public/favicon.png?token=AMMGHSXPEB4TSUCT4R4YISTBV2NHM)
+
 
 ## Color Reference
 
