@@ -5,7 +5,8 @@
 > This app helps leaders of The Church of Jesus Christ of Latter-day Saints to plan a sacrament meeting. Here, they can keep control of the agendas of the meetings that normally take place on Sundays.
 
 ---
-**NOTE**
+
+**Try it out!**
 
 Run our most recent [deployed version](http://sacredplanner.xyz/).
 
