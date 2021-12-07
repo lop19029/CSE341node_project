@@ -23,9 +23,9 @@ Run our most recent [deployed version](http://sacredplanner.xyz/).
 
 * `node v14.15.4`
 
-## 🚀 Running <The_Sacred_Planner>
+## 🚀 Running the project
 
-In order to install <The_Sacred_Planner>, follow this steps:
+In order to install, follow this steps:
 
 Clone the project
 
@@ -51,7 +51,7 @@ Start the server
   npm run start
 ```
 
-## ☕ Using <The_Sacred_Planner>
+## ☕ Using the app
 
 Run the following link in your browser:
 
