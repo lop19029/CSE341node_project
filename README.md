@@ -10,6 +10,11 @@
 
 Run our most recent [deployed version](http://sacredplanner.xyz/).
 
+Admin account for test purposes:
+
+Email: *admin_test@test.com*
+Password: *12345*
+
 ---
 
 ### Functionalities
