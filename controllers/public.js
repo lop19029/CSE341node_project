@@ -1,14 +1,13 @@
-
 const socialLinks = {
-    Facebook: "https://www.facebook.com/",
-    Twitter: "https://twitter.com/",
-    WhatsApp: "https://api.whatsapp.com/send?phone=593",
-    Phone: "tel:+99999999999",
-    Instagram: "https://www.instagram.com/",
-    Youtube: "https://www.youtube.com/",
-    Email: "mailto:@",
-    Copyright: "https://sacredplanner.xyz/"
-}
+    Facebook: process.env.FACEBOOK,
+    Twitter: process.env.TWITTER,
+    WhatsApp: process.env.WHATSAPP,
+    Phone: process.env.PHONE,
+    Instagram: process.env.INSTAGRAM,
+    Youtube: process.env.YOUTUBE,
+    Email: process.env.EMAIL,
+    Copyright: process.env.COPYRIGHT
+  }
 const User = require('../models/user');
 //Validator of Inputs
 const {

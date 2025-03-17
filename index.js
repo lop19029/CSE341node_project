@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 
 /************ Andres ****************/
@@ -31,7 +32,7 @@ const AuthRoutes = require('./routes/auth');
 /*********** Andres  ***************/
 const User = require('./models/user');
 
-const MONGODB_URI ='mongodb+srv://team6:sacredplanner@sacredplanner.pc2qm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI =process.env.MONGODB_URI;
 
 const store = new MongoDBStore({
   uri: MONGODB_URI,
@@ -43,7 +44,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     session({
-      secret: 'my secret1',
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
       store: store
@@ -106,7 +107,7 @@ app.use(PublicRoutes);
 mongoose
 .connect(MONGODB_URI)
 .then(result => {
-  app.listen(80);
+  app.listen(process.env.APP_PORT);
   console.log('Connected to Data base')
 })
 .catch(err => {
