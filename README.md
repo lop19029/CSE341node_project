@@ -95,10 +95,10 @@ http://localhost:80
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/MarcoAntonioMGDA">
+      <a href="https://github.com/MarAntBQ">
         <img src="https://avatars.githubusercontent.com/u/35369000?v=4" width="100px;" alt="Foto Marco Bustillos GitHub"/><br>
         <sub>
-          <b>Marco Bustillos</b>
+          <b>Marco A. Bustillos</b>
         </sub>
       </a>
     </td>
